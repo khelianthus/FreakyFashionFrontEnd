@@ -36,6 +36,7 @@ export default async function SearchResults({ params: { searchTerm } }: Props) {
     //Sparar resultatet av vår fetch asynkront som blir en array av Product, sparar den i en const
   const products: Product[] = await getProducts(searchTerm);
 
+
     //Genererar HTML-innehåll av vårt resultat dynamiskt 
   const content = (
     <main className="bg-slate-200 mx-auto max-w-lg py-1 min-h-screen">
