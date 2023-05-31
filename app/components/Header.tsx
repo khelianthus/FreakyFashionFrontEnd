@@ -54,7 +54,7 @@ export default function Header() {
                 className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 aria-hidden="true"
               >
@@ -70,7 +70,7 @@ export default function Header() {
                 className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 aria-hidden="true"
               >
