@@ -1,4 +1,4 @@
-import getProductResults from "../api/getProductResults";
+import getProducts from "../api/getProducts";
 import ProductCard from "./components/ProductCard";
 
 //Tar in searchTerm från sökfältet så vi kan använda den här
@@ -12,7 +12,7 @@ type Props = {
 
 export async function generateMetadata({ params: { searchTerm } }: Props) {
     //Sparar resultatet av vår fetch asynkront som blir en array av Product, sparar den i en const
-  const products: Product[] = await getProductResults(searchTerm);
+  const products: Product[] = await getProducts(searchTerm);
 
     //mellanslag i söktermen blir till ett faktiskt mellanslag i URL
   const displayTerm = searchTerm.replaceAll("%20", " ");
@@ -34,7 +34,8 @@ export async function generateMetadata({ params: { searchTerm } }: Props) {
     //Genrerar vårt sökresultat utifrån vår searchTerm som är av objekt Props
 export default async function SearchResults({ params: { searchTerm } }: Props) {
     //Sparar resultatet av vår fetch asynkront som blir en array av Product, sparar den i en const
-  const products: Product[] = await getProductResults(searchTerm);
+  const products: Product[] = await getProducts(searchTerm);
+
 
     //Genererar HTML-innehåll av vårt resultat dynamiskt 
   const content = (
