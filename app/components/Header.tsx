@@ -1,13 +1,14 @@
 'use client';
 
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import Search from './Search';
+import Search from './Search'
+import { Basket } from './Basket'
 
 // Inte kopplad till "caregories" i databasen ännu. 
 
@@ -33,17 +34,26 @@ function classNames(...classes: string[]) {
 }
 
 export default function Header() {
+
+  const [open, setOpen] = useState(false)
+
+    const handleOpenCart = () => {
+        setOpen(!open);
+      };
+
   return (
 
-    <header className="sticky top-0 z-50">
+    <header className="sticky top-0 z-40">
       <nav className="bg-white border-gray-200 -mb-3">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl py-4 px-6">
           <div className="flex items-center">
-            <img
-              src="https://plchldr.co/i/170x50?&bg=000000=FFFFFF&text=logo"
-              className="h-11 mr-5"
-              alt="Logo"
-            /> 
+            <a href="/">
+              <img
+                src="https://plchldr.co/i/170x50?&bg=000000=FFFFFF&text=logo"
+                className="h-11 mr-5"
+                alt="Logo"
+              /> 
+            </a>
             <Search/> 
           </div>
 
@@ -65,7 +75,7 @@ export default function Header() {
                 />
               </svg>
             </a>
-            <a href="#" className="group -m-2 flex items-center p-2">
+            <div onClick={handleOpenCart} className="group -m-2 flex items-center p-2">
               <svg
                 className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                 fill="none"
@@ -84,7 +94,8 @@ export default function Header() {
                 className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"
                 >0</span>
               <span className="sr-only">items in cart, view bag</span>
-            </a>
+            </div>
+            {open && <Basket />}
           </div>
         </div>
       </nav>
