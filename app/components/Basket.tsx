@@ -1,69 +1,78 @@
 'use client';
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
-const products = [
-  {
-    id: 1,
-    name: 'T-Shirt',
-    description: 'Lorem ipsum dolor sit amet',
-    brand: 'Levis',
-    price: 199,
-    sku: 'BBB111',
-    imageUrl: 'https://via.placeholder.com/320x480.png?text=Svart+T-shirt',
-    urlSlug: 'svart-tshirt',
-    likes: 180,
-    color: 'Svart',
-    category: 'Tröjor',
-    createdat: '2023-05-29'
-  },
-  {
-    id: 2,
-    name: 'T-Shirt',
-    description: 'Lorem ipsum dolor sit amet',
-    brand: 'Nike',
-    price: 219,
-    sku: 'BBB111',
-    imageUrl: 'https://via.placeholder.com/320x480.png?text=Vit+T-shirt',
-    urlSlug: 'vit-tshirt',
-    likes: 180,
-    color: 'Vit',
-    category: 'Tröjor',
-    createdat: '2023-05-29'
-  },
-  {
-    id: 3,
-    name: 'T-Shirt',
-    description: 'Lorem ipsum dolor sit amet',
-    brand: 'Nike',
-    price: 229,
-    sku: 'BBB111',
-    imageUrl: 'https://via.placeholder.com/320x480.png?text=Rosa+T-shirt',
-    urlSlug: 'rosa-tshirt',
-    likes: 180,
-    color: 'Rosa',
-    category: 'Tröjor',
-    createdat: '2023-05-29'
-  },
-  // More products...
-]
-
-function calculateTotalPrice(products: Product[]) {
-    let totalPrice = 0;
-  
-    products.forEach((product: Product) => {
-      const price = product.price;
-      totalPrice += price;
-    });
-  
-    return totalPrice.toFixed(2);
+export interface Product {
+  id: number,
+  name: string,
+  description: string,
+  brand: string,
+  price: number,
+  sku: string,
+  imageUrl: string,
+  urlSlug: string,
+  likes: number,
+  color: string,
+  category: string,
+  createdat: string
+  quantity: number;
 }
 
-const totalPrice = calculateTotalPrice(products)
+export function calculateQuantityPrice(product: any) {
+  let quantityPrice = product.price * product.quantity; 
+
+  return quantityPrice;
+}
+
+export function calculateTotalProductPrice(products: Product[]) {
+  let totalProductPrice = 0;
+
+  products.forEach((product: Product) => {
+    const price = product.price * product.quantity;
+    totalProductPrice += price;
+  });
+
+  return totalProductPrice.toFixed(2);
+}
 
 export function Basket() {
   const [open, setOpen] = useState(true)
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const productsJSON = localStorage.getItem('cart');
+    const parsedProducts = productsJSON ? JSON.parse(productsJSON) : [];
+    setProducts(parsedProducts);
+  }, []);
+
+  const updateQuantity = (productId: number, quantity: number) => {
+    const updatedProducts = products.map((product: Product) => {
+      if (product.id === productId) {
+        return { ...product, quantity }; // Uppdatera kvantiteten för den specifika produkten
+      }
+      return product;
+    });
+
+    // Uppdatera varukorgen i localStorage
+    localStorage.setItem('cart', JSON.stringify(updatedProducts));
+  };
+
+  function removeProduct(event: React.MouseEvent<HTMLButtonElement>) {
+    const productId = event.currentTarget.getAttribute('data-product-id');
+    if (productId) {
+      const productsJSON = localStorage.getItem('cart');
+      if (productsJSON) {
+        const existingProducts = JSON.parse(productsJSON);
+        const updatedProducts = existingProducts.filter(
+          (product: Product) => product.id !== parseInt(productId)
+        );
+        localStorage.setItem('cart', JSON.stringify(updatedProducts));
+      }
+    }
+  }
+
+  const totalProductPrice = calculateTotalProductPrice(products);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -100,7 +109,7 @@ export function Basket() {
                       <div className="mt-8">
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {products.map((product) => (
+                            {products.map((product: any) => (
                               <li key={product.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
@@ -115,15 +124,17 @@ export function Basket() {
                                       <h3>
                                         <a href={product.href}>{product.name}</a>
                                       </h3>
-                                      <p className="ml-4">{product.price}</p>
+                                      <p className="ml-4">{calculateQuantityPrice(product)} kr</p>
                                     </div>
                                     <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Antal {product.category}</p>
+                                    <p className="text-gray-500">Antal {product.quantity}</p>
 
                                     <div className="flex">
                                       <button
+                                        onClick={removeProduct}
+                                        data-product-id={product.id}
                                         type="button"
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
                                       >
@@ -142,7 +153,7 @@ export function Basket() {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Summa</p>
-                        <p>{totalPrice} kr</p>
+                        <p>{totalProductPrice} kr</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Frakt och moms beräknas i kassan.</p>
                       <div className="mt-6">
