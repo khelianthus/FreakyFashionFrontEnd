@@ -1,43 +1,46 @@
 'use client';
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { Fragment } from 'react'
+
+import { Fragment, useEffect, useState } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
-
-const products = [
-  {
-    id: 1,
-    name: 'Micro Backpack',
-    href: '#',
-    price: '$70.00',
-    color: 'Moss',
-    size: '5L',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/checkout-page-04-product-01.jpg',
-    imageAlt:
-      'Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.',
-  },
-  // More products...
-]
+import { calculateTotalProductPrice, calculateQuantityPrice } from '../components/Basket';
+import { Product } from '../components/Basket';
 
 export default function Checkout() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const productsJSON = localStorage.getItem('cart');
+    const parsedProducts = productsJSON ? JSON.parse(productsJSON) : [];
+    setProducts(parsedProducts);
+  }, []);
+
+  const totalProductPrice = calculateTotalProductPrice(products)
+
+  const shippingCost = 29;
+
+  const taxAmount  = (parseFloat(totalProductPrice) * 0.1).toFixed(2);
+
+  function calculateTotalPrice(products: Product[]) {
+    let totalProductPrice = 0;
+
+    products.forEach((product: any) => {
+      const price = product.price * product.quantity;
+      totalProductPrice += price;
+    });
+
+    let totalPrice = totalProductPrice + shippingCost + Number(taxAmount);
+
+    return totalPrice.toFixed(2);
+  }
+
+  const totalPrice = calculateTotalPrice(products)
+
   return (
     <div className="bg-white">
       {/* Background color split screen for large screens */}
-      <div className="fixed left-0 top-0 hidden h-full w-1/2 bg-white lg:block" aria-hidden="true" />
-      <div className="fixed right-0 top-0 hidden h-full w-1/2 bg-gray-50 lg:block" aria-hidden="true" />
+      <div className="absolute left-0 top-0 hidden h-full w-1/2 bg-white lg:block" aria-hidden="true" />
+      <div className="absolute right-0 top-0 hidden h-full w-1/2 bg-gray-50 lg:block" aria-hidden="true" />
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-16 lg:grid-cols-2 lg:px-8 xl:gap-x-48">
         <h1 className="sr-only">Order information</h1>
@@ -52,19 +55,18 @@ export default function Checkout() {
             </h2>
 
             <ul role="list" className="divide-y divide-gray-200 text-sm font-medium text-gray-900">
-              {products.map((product) => (
+              {products.map((product: Product) => (
                 <li key={product.id} className="flex items-start space-x-4 py-6">
                   <img
-                    src={product.imageSrc}
-                    alt={product.imageAlt}
+                    src={product.imageUrl}
                     className="h-20 w-20 flex-none rounded-md object-cover object-center"
                   />
                   <div className="flex-auto space-y-1">
                     <h3>{product.name}</h3>
                     <p className="text-gray-500">{product.color}</p>
-                    <p className="text-gray-500">{product.size}</p>
+                    <p className="text-gray-500">Antal {product.quantity}</p>
                   </div>
-                  <p className="flex-none text-base font-medium">{product.price}</p>
+                  <p className="flex-none text-base font-medium">{calculateQuantityPrice(product)} kr</p>
                 </li>
               ))}
             </ul>
@@ -72,22 +74,22 @@ export default function Checkout() {
             <dl className="hidden space-y-6 border-t border-gray-200 pt-6 text-sm font-medium text-gray-900 lg:block">
               <div className="flex items-center justify-between">
                 <dt className="text-gray-600">Summa</dt>
-                <dd>$320.00</dd>
+                <dd>{totalProductPrice} kr</dd>
               </div>
 
               <div className="flex items-center justify-between">
                 <dt className="text-gray-600">Frakt</dt>
-                <dd>$15.00</dd>
+                <dd>{shippingCost} kr</dd>
               </div>
 
               <div className="flex items-center justify-between">
                 <dt className="text-gray-600">Moms</dt>
-                <dd>$26.80</dd>
+                <dd>{taxAmount} kr</dd>
               </div>
 
               <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                 <dt className="text-base">Totalt</dt>
-                <dd className="text-base">$361.80</dd>
+                <dd className="text-base">{totalPrice} kr</dd>
               </div>
             </dl>
 
@@ -96,7 +98,7 @@ export default function Checkout() {
                 <div className="mx-auto max-w-lg">
                   <Popover.Button className="flex w-full items-center py-6 font-medium">
                     <span className="mr-auto text-base">Totalt</span>
-                    <span className="mr-2 text-base">$361.80</span>
+                    <span className="mr-2 text-base">{totalPrice} kr</span>
                     <ChevronUpIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
                   </Popover.Button>
                 </div>
@@ -129,17 +131,17 @@ export default function Checkout() {
                       <dl className="mx-auto max-w-lg space-y-6">
                         <div className="flex items-center justify-between">
                           <dt className="text-gray-600">Summa</dt>
-                          <dd>$320.00</dd>
+                          <dd>{totalProductPrice} kr</dd>
                         </div>
 
                         <div className="flex items-center justify-between">
                           <dt className="text-gray-600">Frakt</dt>
-                          <dd>$15.00</dd>
+                          <dd>{shippingCost} kr</dd>
                         </div>
 
                         <div className="flex items-center justify-between">
                           <dt className="text-gray-600">Moms</dt>
-                          <dd>$26.80</dd>
+                          <dd>{taxAmount} kr</dd>
                         </div>
                       </dl>
                     </Popover.Panel>
@@ -157,109 +159,63 @@ export default function Checkout() {
                 Kontaktinformation
               </h2>
 
-              <div className="mt-6">
-                <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                  Email adress
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="email"
-                    id="email-address"
-                    name="email-address"
-                    autoComplete="email"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
+              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-4"> 
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                    Förnamn
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="email"
+                      id="email-address"
+                      name="email-address"
+                      autoComplete="email"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
                 </div>
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                    Efternamn
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="email"
+                      id="email-address"
+                      name="email-address"
+                      autoComplete="email"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-4">
+                  <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                    Email adress
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="email"
+                      id="email-address"
+                      name="email-address"
+                      autoComplete="email"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
               </div>
-            </section>
 
-            <section aria-labelledby="payment-heading" className="mt-10">
-              <h2 id="payment-heading" className="text-lg font-medium text-gray-900">
-                Betalningsinformation
-              </h2>
-
-              <div className="mt-6 grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4">
-                <div className="col-span-3 sm:col-span-4">
-                  <label htmlFor="name-on-card" className="block text-sm font-medium text-gray-700">
-                    Kortinnehavarens namn
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="name-on-card"
-                      name="name-on-card"
-                      autoComplete="cc-name"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div className="col-span-3 sm:col-span-4">
-                  <label htmlFor="card-number" className="block text-sm font-medium text-gray-700">
-                    Kortnummer
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="card-number"
-                      name="card-number"
-                      autoComplete="cc-number"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div className="col-span-2 sm:col-span-3">
-                  <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-700">
-                    Utgångsdatum (MM/YY)
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="expiration-date"
-                      id="expiration-date"
-                      autoComplete="cc-exp"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="cvc" className="block text-sm font-medium text-gray-700">
-                    CVC
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="cvc"
-                      id="cvc"
-                      autoComplete="csc"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-              </div>
-            </section>
+            </section>           
 
             <section aria-labelledby="shipping-heading" className="mt-10">
               <h2 id="shipping-heading" className="text-lg font-medium text-gray-900">
                 Leveransadress
               </h2>
 
-              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-3">
-                <div className="sm:col-span-3">
-                  <label htmlFor="company" className="block text-sm font-medium text-gray-700">
-                    Företag
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
+              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-3">                
 
                 <div className="sm:col-span-3">
                   <label htmlFor="address" className="block text-sm font-medium text-gray-700">
@@ -271,20 +227,6 @@ export default function Checkout() {
                       id="address"
                       name="address"
                       autoComplete="street-address"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label htmlFor="apartment" className="block text-sm font-medium text-gray-700">
-                    Lägenhet, svit osv.
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="apartment"
-                      name="apartment"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
