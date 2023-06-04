@@ -1,3 +1,4 @@
+//Behöver kanske göra om category: string till category: Category på sikt.
 type Product = {
     id: number,
     name: string,
