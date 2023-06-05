@@ -11,7 +11,7 @@ type Product = {
     likes: number,
     color: string,
     category: string,
-    createdat: string
+    createdat: Date
 }
 
 type Category = {

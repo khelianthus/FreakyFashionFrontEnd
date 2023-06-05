@@ -39,11 +39,12 @@ export default async function SearchResults({ params: { searchTerm } }: Props) {
 
     //Genererar HTML-innehåll av vårt resultat dynamiskt 
     const content = (
-    <main className="mx-auto max-w-5xl py-1 min-h-min">
+    <main className="mx-auto min-h-min">
+      <h1 className="text-xl text-gray-500 text-center p-1">Sökresultat för "{searchTerm}":</h1>
         <section className="product-cards">
-            <div className="bg-white">
-                <div className="mx-auto max-w-7xl overflow-hidden px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-                    <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
+            <div className="bg-lightBlue">
+                <div className="mx-auto max-w-7xl overflow-hidden px-4 py-4 sm:px-6 sm:py-16 lg:px-8">
+                    <div className="bg-white shadow-white shadow-2xl rounded-xl p-7 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
         {/* Om products är mer än 0, mappa array till en productCard, iterera (product) 
         För varje product, gör en ProductCard-component där nyckel är product.id*/}
       {products.length > 0 ? (
