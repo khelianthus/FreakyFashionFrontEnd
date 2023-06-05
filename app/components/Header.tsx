@@ -9,37 +9,23 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Search from './Search'
 import { Basket } from './Basket'
-
-// Inte kopplad till "caregories" i databasen ännu. 
-
-const categories = [
-  {
-    name: 'Klänningar',
-    href: '#',
-  },
-  {
-    name: 'Toppar & T-shirts',
-    href: '#',
-  },
-  { name: 'Byxor',
-    href: '#',
-  },
-  { name: 'Blusar & Skjortor',
-    href: '#',
-  }
-]
+import getCategories from "../api/getCategories"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Header() {
+export default async function Header() {
 
   const [open, setOpen] = useState(false)
 
     const handleOpenCart = () => {
         setOpen(!open);
       };
+
+      const categoriesData: Promise<Category[]> = getCategories()
+
+      const categories = await categoriesData
 
   return (
 
@@ -150,23 +136,23 @@ export default function Header() {
                         leaveTo="opacity-0 -translate-y-1"
                       >
                         <Popover.Panel className="absolute inset-x-0 top-full z-10 hidden transform bg-white md:block ">
-                          <div className="ml-32 max-w-7xl pl-3 pt-4 pb-10 divide-y divide-gray-300">
-                            {categories.map((item) => (
-                              <a
-                                key={item.name}
-                                href={item.href}
-                                className="flex flex-col pb-4"
-                              >
-                                <div className="flex md:h-full lg:flex-col">
-                                  <div className="ml-4 md:flex md:flex-1 md:flex-col md:justify-between lg:ml-0 lg:mt-4 ">
-                                    <div>
-                                      <p className="text-sm font-medium text-gray-600 hover:text-gray-900">{item.name}</p>
-                                    </div>
+                        <div className="pl-36 pt-4 pb-10 divide-y divide-gray-300">
+                          {categories.map((category) => (
+                            <a
+                              key={category.id}
+                              href="#"
+                              className="flex flex-col py-4"
+                            >
+                              <div className="flex lg:flex-col md:-mt-3">
+                                <div className="ml-4 md:flex md:flex-1 md:flex-col md:justify-between lg:ml-0 lg:mt-4 ">
+                                  <div>
+                                    <p className="text-sm font-medium text-gray-600 hover:text-gray-900">{category.name}</p>
                                   </div>
                                 </div>
-                              </a>
-                            ))}
-                          </div>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
                         </Popover.Panel>
                       </Transition>
                     </>

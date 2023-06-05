@@ -1,7 +1,7 @@
 
 import Categories from "./components/Categories";
-import Hero from "./components/Hero"
-import PromoSection from "./components/PromoSection"
+import Hero from "./components/Hero";
+import PromoSection from "./components/PromoSection";
 
 export default function Home() {
   return (
