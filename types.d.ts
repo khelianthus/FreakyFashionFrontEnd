@@ -14,6 +14,22 @@ type Product = {
     createdat: Date
 }
 
+type ProductWithQuantity = {
+    id: number,
+    name: string,
+    description: string,
+    brand: string,
+    price: number,
+    sku: string,
+    imageUrl: string,
+    urlSlug: string,
+    likes: number,
+    color: string,
+    category: string,
+    createdat: Date,
+    quantity: number;
+}
+
 type Category = {
     id: number,
     name: string,
