@@ -1,7 +1,7 @@
 export default async function getCategories() {
    
     const response = await fetch('http://localhost:5000/categories', {
-       next: { revalidate: 10 }
+        next: { revalidate: 10 }  
     });
 
     const responseJson = await response.json();
