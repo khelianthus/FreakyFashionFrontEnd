@@ -13,6 +13,7 @@ const LikeButton = () => {
     setIsClicked(!isClicked);
   };
 
+  //TODO: Button background helt rund för hjärtat så man lättare ser den
   return (
     <button className={`like-button ${isClicked && 'liked'} absolute bottom-2 right-2 w-5`}  onClick={handleClick}>
       <span className="likes-counter">
