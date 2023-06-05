@@ -25,3 +25,4 @@ Run FreakyFashionBackend, runs at [http://localhost:5000](http://localhost:5000)
 ## Image credits
 
 - https://se.depositphotos.com/portfolio-1144687.html?content=photo
+- https://se.depositphotos.com/portfolio-7448508.html?content=photo
