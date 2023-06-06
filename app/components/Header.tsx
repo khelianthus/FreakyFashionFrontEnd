@@ -24,8 +24,8 @@ export default function Header() {
 
   return (
 
-    <header className="sticky top-0 z-40">
-      <nav className="bg-white border-gray-200 -mb-3">
+    <header className="sticky top-0 z-40 bg-gradient-to-r from-lightBeige from-60% to-purple-50">
+      <nav className="border-gray-200 -mb-3">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl py-4 px-6">
           <div className="flex items-center">
             <a href="/">
@@ -81,7 +81,7 @@ export default function Header() {
         </div>
       </nav>
 
-      <Popover className="relative bg-white">
+      <Popover className="relative">
         <div className="pointer-events-none absolute inset-0 z-30 border-b border-gray-200" aria-hidden="true" />
           <div className="relative z-20">
             <div className="flex py-5 px-6 mx-auto max-w-screen-xl">
@@ -108,7 +108,7 @@ export default function Header() {
                       <Popover.Button
                         className={classNames(
                           open ? 'text-gray-900 underline underline-offset-8 decoration-2': 'text-gray-900',
-                          'pl-3 group inline-flex items-center rounded-md bg-white text-base hover:text-gray-900 hover:underline underline-offset-8 decoration-2 focus:outline-none'
+                          'pl-3 group inline-flex items-center rounded-md text-base hover:text-gray-900 hover:underline underline-offset-8 decoration-2 focus:outline-none'
                         )}
                       >
                         <span>KLÄDER</span>
