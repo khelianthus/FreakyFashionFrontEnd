@@ -3,32 +3,16 @@ import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
-export interface Product {
-  id: number,
-  name: string,
-  description: string,
-  brand: string,
-  price: number,
-  sku: string,
-  imageUrl: string,
-  urlSlug: string,
-  likes: number,
-  color: string,
-  category: string,
-  createdat: string
-  quantity: number;
-}
-
 export function calculateQuantityPrice(product: any) {
   let quantityPrice = product.price * product.quantity; 
 
   return quantityPrice;
 }
 
-export function calculateTotalProductPrice(products: Product[]) {
+export function calculateTotalProductPrice(products: ProductWithQuantity[]) {
   let totalProductPrice = 0;
 
-  products.forEach((product: Product) => {
+  products.forEach((product: ProductWithQuantity) => {
     const price = product.price * product.quantity;
     totalProductPrice += price;
   });
@@ -47,7 +31,7 @@ export function Basket() {
   }, []);
 
   const updateQuantity = (productId: number, quantity: number) => {
-    const updatedProducts = products.map((product: Product) => {
+    const updatedProducts = products.map((product: ProductWithQuantity) => {
       if (product.id === productId) {
         return { ...product, quantity }; // Uppdatera kvantiteten för den specifika produkten
       }
@@ -65,7 +49,7 @@ export function Basket() {
       if (productsJSON) {
         const existingProducts = JSON.parse(productsJSON);
         const updatedProducts = existingProducts.filter(
-          (product: Product) => product.id !== parseInt(productId)
+          (product: ProductWithQuantity) => product.id !== parseInt(productId)
         );
         localStorage.setItem('cart', JSON.stringify(updatedProducts));
       }
@@ -158,7 +142,7 @@ export function Basket() {
                       <p className="mt-0.5 text-sm text-gray-500">Frakt och moms beräknas i kassan.</p>
                       <div className="mt-6">
                         <a
-                          href="./checkout"
+                          href="../checkout"
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
                           Kassa
