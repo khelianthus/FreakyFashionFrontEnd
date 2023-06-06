@@ -13,6 +13,28 @@ type Product = {
     category: string,
     createdat: Date
 }
+/*
+TODO: Skriva om kod, använd interface - extends.
+Se exempel:
+
+interface Vehicle {
+  brand: string;
+  wheels: number;
+}
+
+interface Car extends Vehicle {
+  engineType: string;
+}
+
+type Vehicle = {
+  brand: string;
+  wheels: number;
+};
+
+type Car = Vehicle & {
+  engineType: string;
+};
+*/
 
 type ProductWithQuantity = {
     id: number,
@@ -28,6 +50,10 @@ type ProductWithQuantity = {
     category: string,
     createdat: Date,
     quantity: number;
+}
+
+type Basket = {
+    
 }
 
 type Category = {
