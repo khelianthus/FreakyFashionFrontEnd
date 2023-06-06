@@ -1,14 +1,10 @@
 'use client'
 import getProductById from "@/app/api/getProductById";
 
-
-
 type Params = {
     params: {
         productId: string
     }
-
-
 }
 
 export default async function Details({params: {productId}}:Params) {

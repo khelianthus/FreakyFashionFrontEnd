@@ -1,4 +1,3 @@
-
 import Categories from "./components/Categories";
 import Hero from "./components/Hero";
 import PromoSection from "./components/PromoSection";
