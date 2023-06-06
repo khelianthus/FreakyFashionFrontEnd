@@ -18,7 +18,6 @@ export default function RootLayout({
   return (
     <html lang="sv">
       <body className={inter.className}>
-        {/* @ts-expect-error Async Server Component */}
         <Header />
         {children}
         <Footer />
