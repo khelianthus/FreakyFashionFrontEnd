@@ -153,7 +153,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
                       <p className="mt-0.5 text-sm text-gray-500">Frakt och moms beräknas i kassan.</p>
                       <div className="mt-6">
                         <a
-                          href="./checkout"
+                          href="../checkout"
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
                           Kassa

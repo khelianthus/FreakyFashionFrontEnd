@@ -16,11 +16,10 @@ export default async function Details({params: {productId}}:Params) {
     product.quantity = 1;
 
     function AddToLocalStorage() {
-
         const productsJSON = localStorage.getItem('cart');
         const existingProducts = productsJSON ? JSON.parse(productsJSON) : [];
         const existingProduct = existingProducts.find((existingProduct: any) => existingProduct.id === product.id);
-
+    
         if (existingProduct) {
           // Om produkten redan finns i varukorgen, öka antalet
           existingProduct.quantity += product.quantity;
@@ -28,9 +27,9 @@ export default async function Details({params: {productId}}:Params) {
           // Annars, lägg till produkten i varukorgen
           existingProducts.push(product);
         }
-
+    
         localStorage.setItem('cart', JSON.stringify(existingProducts));
-    }
+      }
 
    
 
