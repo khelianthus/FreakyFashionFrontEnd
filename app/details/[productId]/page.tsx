@@ -13,9 +13,9 @@ export default async function Details({params: {productId}}:Params) {
 
     const product = await productData; 
 
-    function AddToLocalStorage() {
+    product.quantity = 1;
 
-        // const productWithQuantity = {product, quantity: 1 };
+    function AddToLocalStorage() {
 
         const productsJSON = localStorage.getItem('cart');
         const existingProducts = productsJSON ? JSON.parse(productsJSON) : [];
