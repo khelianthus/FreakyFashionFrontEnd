@@ -19,7 +19,7 @@ export default function ProductCard({ result }: Props) {
 
     const content = (
             <div className="group text-sm">
-                    <div className="aspect-h-6 aspect-w-4 relative overflow-hidden rounded-lg bg-gray-100 ">
+                    <div className="aspect-h-6 aspect-w-4 relative overflow-hidden bg-gray-100 ">
                     <Link href={`details/${result.id}`}>
                           <img 
                           src={result.imageUrl}
@@ -36,8 +36,10 @@ export default function ProductCard({ result }: Props) {
                       </div>
                     </div>
                     <div className='flex justify-between'> 
-                    <h3 className="mt-4 text-base text-gray-900">{result.color} {result.name}</h3>
-                    <p className="mt-4 font-medium text-gray-900">{result.price} SEK</p>
+                    <Link href={`/details/${result.id}`}>
+                    <h3 className="mt-4 text-medium font-medium text-gray-900">{result.color} {result.name}</h3>
+                    </Link>
+                    <p className="mt-4 font-bold text-gray-900">{result.price} SEK</p>
                     </div>
                     <p className="italic text-gray-500 text-xs">{result.brand}</p>
                 </div>
