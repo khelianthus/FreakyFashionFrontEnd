@@ -55,7 +55,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
       if (productsJSON) {
         const existingProducts = JSON.parse(productsJSON);
         const updatedProducts = existingProducts.filter(
-          (product: Product) => product.id !== parseInt(productId)
+          (product: ProductWithQuantity) => product.id !== parseInt(productId)
         );
   
         const totalQuantity = updatedProducts.reduce((total: number, product: ProductWithQuantity) => total + product.quantity, 0);

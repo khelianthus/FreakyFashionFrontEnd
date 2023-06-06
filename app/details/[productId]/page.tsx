@@ -1,14 +1,10 @@
 'use client'
 import getProductById from "@/app/api/getProductById";
 
-
-
 type Params = {
     params: {
         productId: string
     }
-
-
 }
 
 export default async function Details({params: {productId}}:Params) {
@@ -19,7 +15,7 @@ export default async function Details({params: {productId}}:Params) {
 
     function AddToLocalStorage() {
 
-        const productWithQuantity = {product, quantity: 1 };
+        // const productWithQuantity = {product, quantity: 1 };
 
         const productsJSON = localStorage.getItem('cart');
         const existingProducts = productsJSON ? JSON.parse(productsJSON) : [];
@@ -27,10 +23,10 @@ export default async function Details({params: {productId}}:Params) {
 
         if (existingProduct) {
           // Om produkten redan finns i varukorgen, öka antalet
-          existingProduct.quantity += productWithQuantity.quantity;
+          existingProduct.quantity += product.quantity;
         } else {
           // Annars, lägg till produkten i varukorgen
-          existingProducts.push(productWithQuantity);
+          existingProducts.push(product);
         }
 
         localStorage.setItem('cart', JSON.stringify(existingProducts));
