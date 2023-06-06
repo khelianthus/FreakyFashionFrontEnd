@@ -18,6 +18,11 @@ function classNames(...classes: string[]) {
 export default function Header() {
 
   const [open, setOpen] = useState(false)
+
+  const handleOpenCart = () => {
+    setOpen(!open);
+  };
+
   const [cartQuantity, setCartQuantity] = useState(0);
 
   useEffect(() => {
@@ -36,11 +41,6 @@ export default function Header() {
 
     fetchCartQuantity();
   }, []);
-
-    const handleOpenCart = () => {
-        setOpen(!open);
-      };
-
 
   return (
 

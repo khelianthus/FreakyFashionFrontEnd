@@ -34,19 +34,19 @@ export function Basket({ setCartQuantity }: BasketProps) {
     setProducts(parsedProducts);
   }, []);
 
-  const updateQuantity = (productId: number, quantity: number) => {
-    const updatedProducts = products.map((product: ProductWithQuantity) => {
-      if (product.id === productId) {
-        return { ...product, quantity }; 
-      }
-      return product;
-    });
+  // const updateQuantity = (productId: number, quantity: number) => {
+  //   const updatedProducts = products.map((product: ProductWithQuantity) => {
+  //     if (product.id === productId) {
+  //       return { ...product, quantity }; 
+  //     }
+  //     return product;
+  //   });
   
-    const totalQuantity = updatedProducts.reduce((total, product) => total + product.quantity, 0);
-    setCartQuantity(totalQuantity);
+  //   const totalQuantity = updatedProducts.reduce((total, product) => total + product.quantity, 0);
+  //   setCartQuantity(totalQuantity);
   
-    localStorage.setItem('cart', JSON.stringify(updatedProducts));
-  };
+  //   localStorage.setItem('cart', JSON.stringify(updatedProducts));
+  // };
   
   function removeProduct(event: React.MouseEvent<HTMLButtonElement>) {
     const productId = event.currentTarget.getAttribute('data-product-id');
@@ -62,6 +62,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
         setCartQuantity(totalQuantity);
   
         localStorage.setItem('cart', JSON.stringify(updatedProducts));
+        setProducts(updatedProducts); 
       }
     }
   }
