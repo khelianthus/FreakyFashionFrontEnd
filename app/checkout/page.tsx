@@ -4,7 +4,6 @@ import { Fragment, useEffect, useState } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
 import { calculateTotalProductPrice, calculateQuantityPrice } from '../components/Basket';
-import { Product } from '../components/Basket';
 
 export default function Checkout() {
   const [products, setProducts] = useState([]);
@@ -21,10 +20,10 @@ export default function Checkout() {
 
   const taxAmount  = (parseFloat(totalProductPrice) * 0.1).toFixed(2);
 
-  function calculateTotalPrice(products: Product[]) {
+  function calculateTotalPrice(products: ProductWithQuantity[]) {
     let totalProductPrice = 0;
 
-    products.forEach((product: any) => {
+    products.forEach((product: ProductWithQuantity) => {
       const price = product.price * product.quantity;
       totalProductPrice += price;
     });
@@ -55,7 +54,7 @@ export default function Checkout() {
             </h2>
 
             <ul role="list" className="divide-y divide-gray-200 text-sm font-medium text-gray-900">
-              {products.map((product: Product) => (
+              {products.map((product: ProductWithQuantity) => (
                 <li key={product.id} className="flex items-start space-x-4 py-6">
                   <img
                     src={product.imageUrl}
