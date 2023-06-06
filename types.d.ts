@@ -52,9 +52,6 @@ type ProductWithQuantity = {
     quantity: number;
 }
 
-type Basket = {
-    
-}
 
 type Category = {
     id: number,

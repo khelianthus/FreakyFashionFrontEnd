@@ -7,33 +7,16 @@ export interface BasketProps {
   setCartQuantity: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export interface Product {
-  id: number;
-  name: string;
-  description: string;
-  brand: string;
-  price: number;
-  sku: string;
-  imageUrl: string;
-  urlSlug: string;
-  likes: number;
-  color: string;
-  category: string;
-  createdat: string;
-  quantity: number;
-}
-
-
-export function calculateQuantityPrice(product: any) {
+export function calculateQuantityPrice(product: ProductWithQuantity) {
   let quantityPrice = product.price * product.quantity; 
 
   return quantityPrice;
 }
 
-export function calculateTotalProductPrice(products: Product[]) {
+export function calculateTotalProductPrice(products: ProductWithQuantity[]) {
   let totalProductPrice = 0;
 
-  products.forEach((product: Product) => {
+  products.forEach((product: ProductWithQuantity) => {
     const price = product.price * product.quantity;
     totalProductPrice += price;
   });
@@ -52,7 +35,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
   }, []);
 
   const updateQuantity = (productId: number, quantity: number) => {
-    const updatedProducts = products.map((product: Product) => {
+    const updatedProducts = products.map((product: ProductWithQuantity) => {
       if (product.id === productId) {
         return { ...product, quantity }; 
       }
