@@ -3,7 +3,11 @@ import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
-export function calculateQuantityPrice(product: any) {
+export interface BasketProps {
+  setCartQuantity: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export function calculateQuantityPrice(product: ProductWithQuantity) {
   let quantityPrice = product.price * product.quantity; 
 
   return quantityPrice;
@@ -20,7 +24,7 @@ export function calculateTotalProductPrice(products: ProductWithQuantity[]) {
   return totalProductPrice.toFixed(2);
 }
 
-export function Basket() {
+export function Basket({ setCartQuantity }: BasketProps) {
   const [open, setOpen] = useState(true)
   const [products, setProducts] = useState([]);
 
@@ -33,15 +37,17 @@ export function Basket() {
   const updateQuantity = (productId: number, quantity: number) => {
     const updatedProducts = products.map((product: ProductWithQuantity) => {
       if (product.id === productId) {
-        return { ...product, quantity }; // Uppdatera kvantiteten för den specifika produkten
+        return { ...product, quantity }; 
       }
       return product;
     });
-
-    // Uppdatera varukorgen i localStorage
+  
+    const totalQuantity = updatedProducts.reduce((total, product) => total + product.quantity, 0);
+    setCartQuantity(totalQuantity);
+  
     localStorage.setItem('cart', JSON.stringify(updatedProducts));
   };
-
+  
   function removeProduct(event: React.MouseEvent<HTMLButtonElement>) {
     const productId = event.currentTarget.getAttribute('data-product-id');
     if (productId) {
@@ -51,12 +57,17 @@ export function Basket() {
         const updatedProducts = existingProducts.filter(
           (product: ProductWithQuantity) => product.id !== parseInt(productId)
         );
+  
+        const totalQuantity = updatedProducts.reduce((total: number, product: ProductWithQuantity) => total + product.quantity, 0);
+        setCartQuantity(totalQuantity);
+  
         localStorage.setItem('cart', JSON.stringify(updatedProducts));
       }
     }
   }
-
+  
   const totalProductPrice = calculateTotalProductPrice(products);
+  
 
   return (
     <Transition.Root show={open} as={Fragment}>

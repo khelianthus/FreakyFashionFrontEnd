@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -9,6 +9,7 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Search from './Search'
 import { Basket } from './Basket'
+import CartNotification from './CartNotification';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -17,10 +18,29 @@ function classNames(...classes: string[]) {
 export default function Header() {
 
   const [open, setOpen] = useState(false)
+  const [cartQuantity, setCartQuantity] = useState(0);
+
+  useEffect(() => {
+    const fetchCartQuantity = () => {
+      const serializedProducts = localStorage.getItem('cart');
+      const basketquantity = serializedProducts ? JSON.parse(serializedProducts) : [];
+
+      let quantity = 0;
+
+      basketquantity.forEach((prod: ProductWithQuantity) => {
+        quantity += prod.quantity;
+      });
+
+      setCartQuantity(quantity);
+    };
+
+    fetchCartQuantity();
+  }, []);
 
     const handleOpenCart = () => {
         setOpen(!open);
       };
+
 
   return (
 
@@ -71,13 +91,10 @@ export default function Header() {
                   d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
                 />
               </svg>
-              <span
-                className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"
-                >0</span>
-              <span className="sr-only">items in cart, view bag</span>
+              <CartNotification cartQuantity={cartQuantity} />              
             </div>
-            {open && <Basket />}
-          </div>
+            {open && <Basket setCartQuantity={setCartQuantity} />}          
+            </div>
         </div>
       </nav>
 
