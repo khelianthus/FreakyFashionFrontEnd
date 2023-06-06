@@ -3,26 +3,26 @@ import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
-<<<<<<< Updated upstream
-export interface Product {
-  id: number,
-  name: string,
-  description: string,
-  brand: string,
-  price: number,
-  sku: string,
-  imageUrl: string,
-  urlSlug: string,
-  likes: number,
-  color: string,
-  category: string,
-  createdat: string
-  quantity: number;
-=======
-interface BasketProps {
+export interface BasketProps {
   setCartQuantity: React.Dispatch<React.SetStateAction<number>>;
->>>>>>> Stashed changes
 }
+
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  brand: string;
+  price: number;
+  sku: string;
+  imageUrl: string;
+  urlSlug: string;
+  likes: number;
+  color: string;
+  category: string;
+  createdat: string;
+  quantity: number;
+}
+
 
 export function calculateQuantityPrice(product: any) {
   let quantityPrice = product.price * product.quantity; 
