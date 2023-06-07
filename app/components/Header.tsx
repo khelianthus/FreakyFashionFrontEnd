@@ -47,11 +47,11 @@ export default function Header() {
     <header className="sticky top-0 z-40 bg-gradient-to-r from-lightBeige from-60% to-purple-50">
       <nav className="border-gray-200 -mb-3">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl py-4 px-6">
-          <div className="flex items-center">
+          <div className="md:flex md:items-center">
             <a href="/">
               <img
                 src="https://plchldr.co/i/170x50?&bg=000000=FFFFFF&text=logo"
-                className="h-11 mr-5"
+                className="h-11 mr-5 my-3"
                 alt="Logo"
               /> 
             </a>
@@ -109,7 +109,7 @@ export default function Header() {
                 </Popover.Button>
               </div>
             
-              <Popover.Group as="nav" className="flex justify-start divide-x divide-gray-300 space-x-3">
+              <Popover.Group as="nav" className="hidden md:flex justify-start divide-x divide-gray-300 space-x-3">
                 <a href="#" className="text-base text-gray-900 hover:underline underline-offset-8 decoration-2">
                   NYHETER
                 </a>
@@ -166,7 +166,7 @@ export default function Header() {
             </div>
           </div>
 
-        {/* Bortkommenterad kod = anpassning av headern i mobilläge. Fungerar inte ännu. 
+        {/* Bortkommenterad kod = anpassning av menyn i mobilläge. Fungerar inte ännu. 
         
         
           <Transition
