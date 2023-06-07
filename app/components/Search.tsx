@@ -2,12 +2,9 @@ import { useState, FormEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function Search() {
-    //Holds current search term in useState('')
     const [search, setSearch] = useState('')
     const router = useRouter()
 
-    //Router will send us to the new page with the search result
-    //preventDefault sends us away from page
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setSearch('')

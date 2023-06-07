@@ -1,8 +1,8 @@
 "use client";
-//Behöver använda use client för att LikeButton ska fungera, får ej vara server-renderad. LikeButton har useState.
 import React, { useRef } from 'react';
 import LikeButton from './LikeButton';
 import NewBadge from './NewBadge';
+import Link from 'next/link';
 
 type Props = {
     result: Product;
@@ -17,33 +17,32 @@ export default function ProductCard({ result }: Props) {
 
   const isYoungerThanOneMonth = createdAtDate > oneMonthAgo;
 
-
     const content = (
             <div className="group text-sm">
-                    <div className="aspect-h-6 aspect-w-4 relative overflow-hidden rounded-lg bg-gray-100 ">
-                      <a href="https://google.com">
-                        <img 
+                    <div className="aspect-h-6 aspect-w-4 relative overflow-hidden bg-gray-100 ">
+                    <Link href={`details/${result.id}`}>
+                          <img 
                           src={result.imageUrl}
                           alt={result.name}
                           className="h-full w-full object-cover object-center"
                           loading="lazy"
                           />
-                        </a>
-                        {/* Om produkten är createdAt för mindre än en månad sedan skriver vi ut newbadge, annars inget */}
                         {isYoungerThanOneMonth && <NewBadge />}
+                      </Link>
                       <div>
-                        <div className="absolute bottom-2 right-2 w-5">
+                        <div className="absolute bottom-2 right-2 w-5 overflow-visible">
                           <LikeButton/>
                         </div>
                       </div>
                     </div>
                     <div className='flex justify-between'> 
-                    <h3 className="mt-4 text-base text-gray-900">{result.color} {result.name}</h3>
-                    <p className="mt-4 font-medium text-gray-900">{result.price} SEK</p>
+                    <Link href={`/details/${result.id}`}>
+                    <h3 className="mt-4 text-medium font-medium text-gray-900">{result.color} {result.name}</h3>
+                    </Link>
+                    <p className="mt-4 font-bold text-gray-900">{result.price} SEK</p>
                     </div>
                     <p className="italic text-gray-500 text-xs">{result.brand}</p>
                 </div>
     )
-
     return content
 }

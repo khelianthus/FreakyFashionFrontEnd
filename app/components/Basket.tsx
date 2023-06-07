@@ -3,7 +3,11 @@ import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
-export function calculateQuantityPrice(product: any) {
+export interface BasketProps {
+  setCartQuantity: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export function calculateQuantityPrice(product: ProductWithQuantity) {
   let quantityPrice = product.price * product.quantity; 
 
   return quantityPrice;
@@ -20,9 +24,10 @@ export function calculateTotalProductPrice(products: ProductWithQuantity[]) {
   return totalProductPrice.toFixed(2);
 }
 
-export function Basket() {
+export function Basket({ setCartQuantity }: BasketProps) {
   const [open, setOpen] = useState(true)
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductWithQuantity[]>([]);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const productsJSON = localStorage.getItem('cart');
@@ -33,15 +38,18 @@ export function Basket() {
   const updateQuantity = (productId: number, quantity: number) => {
     const updatedProducts = products.map((product: ProductWithQuantity) => {
       if (product.id === productId) {
-        return { ...product, quantity }; // Uppdatera kvantiteten för den specifika produkten
+        return { ...product, quantity }; 
       }
       return product;
     });
-
-    // Uppdatera varukorgen i localStorage
+  
+    const totalQuantity = updatedProducts.reduce((total, product) => total + product.quantity, 0);
+    setCartQuantity(totalQuantity);
+  
     localStorage.setItem('cart', JSON.stringify(updatedProducts));
+    setProducts(updatedProducts);
   };
-
+  
   function removeProduct(event: React.MouseEvent<HTMLButtonElement>) {
     const productId = event.currentTarget.getAttribute('data-product-id');
     if (productId) {
@@ -51,12 +59,28 @@ export function Basket() {
         const updatedProducts = existingProducts.filter(
           (product: ProductWithQuantity) => product.id !== parseInt(productId)
         );
+  
+        const totalQuantity = updatedProducts.reduce((total: number, product: ProductWithQuantity) => total + product.quantity, 0);
+        setCartQuantity(totalQuantity);
+  
         localStorage.setItem('cart', JSON.stringify(updatedProducts));
+        setProducts(updatedProducts); 
       }
     }
   }
-
+  
   const totalProductPrice = calculateTotalProductPrice(products);
+  
+  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newQuantity = parseInt(event.target.value);
+    if (newQuantity >= 1 && newQuantity <= 9) {
+      setQuantity(newQuantity);
+      const productId = event.currentTarget.getAttribute('data-product-id');
+      if (productId) {
+        updateQuantity(parseInt(productId), newQuantity);
+      }
+    }
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -113,8 +137,16 @@ export function Basket() {
                                     <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Antal {product.quantity}</p>
-
+                                    <input className="w-24 h-8 border border-gray-600 outline-0"  
+                                        placeholder={product.quantity.toString()} 
+                                        type="number" 
+                                        id="amount" 
+                                        defaultValue={product.quantity} 
+                                        min={1}
+                                        max={9}
+                                        data-product-id={product.id}
+                                        onChange={handleQuantityChange}
+                                    />
                                     <div className="flex">
                                       <button
                                         onClick={removeProduct}
@@ -151,6 +183,7 @@ export function Basket() {
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
                           eller 
+                          <br />
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
