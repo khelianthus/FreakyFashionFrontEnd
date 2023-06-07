@@ -31,3 +31,8 @@ Run FreakyFashionBackend, runs at [http://localhost:5000](http://localhost:5000)
 - https://se.depositphotos.com/portfolio-1310467.html?content=photo
 - https://se.depositphotos.com/portfolio-13194036.html?content=photo
 - https://se.depositphotos.com/portfolio-1006318.html?content=photo
+- https://unsplash.com/@skumen
+- https://unsplash.com/@dannypro36
+- https://unsplash.com/@mehappypatel
+- https://unsplash.com/@jonathanborba
+- https://www.freepik.com/author/freepik
