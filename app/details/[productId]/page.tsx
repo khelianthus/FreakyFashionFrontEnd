@@ -1,5 +1,6 @@
 'use client'
 import getProductById from "@/app/api/getProductById";
+import { useState, useEffect } from "react";
 
 type Params = {
     params: {
@@ -7,31 +8,49 @@ type Params = {
     }
 }
 
-export default async function Details({params: {productId}}:Params) {
+export default function Details({params: {productId}}:Params) {
 
-    const productData: Promise<ProductWithQuantity> = getProductById(productId);
+    const [product, setProduct] = useState<ProductWithQuantity>();
+    const [quantity, setQuantity] = useState(1);
 
-    const product = await productData; 
+    useEffect(() => {
+        async function fetchData() {
+        const productData = await getProductById(productId);
+        productData.quantity = quantity;
+        setProduct(productData);
+        }
 
-    product.quantity = 1;
+        fetchData();
+    }, [productId, quantity]);
+
+    function handleQuantityChange(event: React.ChangeEvent<HTMLInputElement>) {
+        const newQuantity = parseInt(event.target.value);
+        if (newQuantity >= 1 && newQuantity <= 9) {
+            setQuantity(newQuantity);
+        }
+    }
 
     function AddToLocalStorage() {
-        const productsJSON = localStorage.getItem('cart');
+        const productsJSON = localStorage.getItem("cart");
         const existingProducts = productsJSON ? JSON.parse(productsJSON) : [];
-        const existingProduct = existingProducts.find((existingProduct: any) => existingProduct.id === product.id);
-    
-        if (existingProduct) {
-          // Om produkten redan finns i varukorgen, öka antalet
-          existingProduct.quantity += product.quantity;
-        } else {
-          // Annars, lägg till produkten i varukorgen
-          existingProducts.push(product);
-        }
-    
-        localStorage.setItem('cart', JSON.stringify(existingProducts));
-      }
+        const existingProduct = existingProducts.find(
+        (existingProduct: any) => existingProduct.id === product?.id
+        );
 
-   
+        if (existingProduct) {
+        // Om produkten redan finns i varukorgen, öka antalet
+        existingProduct.quantity += quantity;
+        } else {
+        // Annars, lägg till produkten i varukorgen
+        existingProducts.push(product);
+        }
+
+        localStorage.setItem("cart", JSON.stringify(existingProducts));
+    }
+
+    if (!product) {
+        return <div>Loading...</div>;
+    }
 
   return (
     <section className="w-11/12 md:w-3/5 h-screen m-auto flex items-center">
@@ -50,7 +69,15 @@ export default async function Details({params: {productId}}:Params) {
         <h2 className="text-xl font-bold">{product.price} kr</h2>
         <p className="text-sm">{product.description}</p>
         <div className="space-y-5"> 
-            <input className="w-24 h-8 border border-gray-600 outline-0"  placeholder="1" type="number" id="amount"/>
+            <input className="w-24 h-8 border border-gray-600 outline-0"  
+                placeholder="1" 
+                type="number" 
+                id="amount" 
+                defaultValue={quantity} 
+                min={1}
+                max={9}
+                onChange={handleQuantityChange}
+            />
             <div>
                 <button className="w-8 h-8 bg-black rounded-full shadow-xl"></button>
                 <button className="w-8 h-8 bg-red-500 rounded-full shadow-xl"></button>
