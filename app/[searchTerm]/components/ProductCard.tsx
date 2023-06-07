@@ -30,7 +30,7 @@ export default function ProductCard({ result }: Props) {
                         {isYoungerThanOneMonth && <NewBadge />}
                       </Link>
                       <div>
-                        <div className="absolute bottom-2 right-2 w-5 overflow-visible">
+                        <div className="absolute bottom-2 right-2 w-5">
                           <LikeButton/>
                         </div>
                       </div>
