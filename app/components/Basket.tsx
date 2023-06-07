@@ -120,7 +120,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
                             {products.map((product: any) => (
                               <li key={product.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <a href={`details/${product.id}`}>
+                                <a href={`/details/${product.id}`}>
                                     <img
                                       src={product.imageUrl}                                   
                                       className="h-full w-full object-cover object-center"
