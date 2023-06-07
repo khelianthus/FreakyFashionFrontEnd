@@ -120,17 +120,19 @@ export function Basket({ setCartQuantity }: BasketProps) {
                             {products.map((product: any) => (
                               <li key={product.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                  <img
-                                    src={product.imageUrl}                                   
-                                    className="h-full w-full object-cover object-center"
-                                  />
+                                <a href={`details/${product.id}`}>
+                                    <img
+                                      src={product.imageUrl}                                   
+                                      className="h-full w-full object-cover object-center"
+                                    />
+                                </a>  
                                 </div>
 
                                 <div className="ml-4 flex flex-1 flex-col">
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                       <h3>
-                                        <a href={product.href}>{product.name}</a>
+                                        {product.name}
                                       </h3>
                                       <p className="ml-4">{calculateQuantityPrice(product)} kr</p>
                                     </div>

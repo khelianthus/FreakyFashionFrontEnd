@@ -56,10 +56,12 @@ export default function Checkout() {
             <ul role="list" className="divide-y divide-gray-200 text-sm font-medium text-gray-900">
               {products.map((product: ProductWithQuantity) => (
                 <li key={product.id} className="flex items-start space-x-4 py-6">
-                  <img
-                    src={product.imageUrl}
-                    className="h-20 w-20 flex-none rounded-md object-cover object-center"
-                  />
+                  <a href={`details/${product.id}`}>
+                    <img
+                      src={product.imageUrl}
+                      className="h-20 w-20 flex-none rounded-md object-cover object-center"
+                    />
+                  </a>
                   <div className="flex-auto space-y-1">
                     <h3>{product.name}</h3>
                     <p className="text-gray-500">{product.color}</p>
