@@ -2,7 +2,7 @@
 
 export default function Footer() {
     return (
-      <footer className="bg-gradient-to-t from-purple-100 to-lime-100" aria-labelledby="footer-heading">
+      <footer className="absolute right-0 left-0 bg-gradient-to-t from-purple-100 to-lime-100" aria-labelledby="footer-heading">
            <div className="bg-white">
               <div className="flex flex-col border-b border-gray-200 lg:border-0">
                 <nav aria-label="Offers" className="order-last lg:order-first">
