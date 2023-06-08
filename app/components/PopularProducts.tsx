@@ -11,7 +11,7 @@ export default async function PopularProducts() {
 
     const content = (
     <div className="bg-white">
-      <div className="mx-auto max-w-screen-2xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+      <div className="mx-auto max-w-screen-lg px-4 py-10 sm:px-6 sm:py-12 lg:px-8 2xl:max-w-screen-xl">
         <div className="sm:flex sm:items-baseline sm:justify-between">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Populära produkter</h2>
           <a href="#" className="hidden text-sm font-semibold text-gray-700 hover:text-gray-900 sm:block">
@@ -26,6 +26,7 @@ export default async function PopularProducts() {
             <ProductCard key={product.id} result={product} />
           ))}
         </div>
+       
       </div>
    
 

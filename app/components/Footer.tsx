@@ -2,11 +2,11 @@
 
 export default function Footer() {
     return (
-      <footer className="bg-gradient-to-t from-purple-100 to-lime-100" aria-labelledby="footer-heading">
+      <footer className="absolute right-0 left-0 bg-gradient-to-t from-purple-100 to-lime-100" aria-labelledby="footer-heading">
            <div className="bg-white">
               <div className="flex flex-col border-b border-gray-200 lg:border-0">
                 <nav aria-label="Offers" className="order-last lg:order-first">
-                  <div className="mx-auto max-w-7xl lg:px-8">
+                  <div className="mx-auto max-w-screen-lg lg:px-8 2xl:max-w-screen-xl">
                     <ul role="list" className="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-3 lg:divide-x lg:divide-y-0">
                       <li className="flex flex-col">
                         <a href="#" className="relative flex flex-1 flex-col justify-center bg-white px-4 py-6 text-center focus:z-10">
@@ -40,9 +40,9 @@ export default function Footer() {
                 </nav>
               </div>
             </div>
-            <div className="bg-white py-4"></div>
+            <div className="lg:bg-white py-4"></div>
               <h2 id="footer-heading" className="sr-only">Footer</h2>
-                <div className="mx-auto max-w-7xl px-6 pb-8 pt-20 sm:pt-24 lg:px-8 lg:pt-14">
+                <div className="mx-auto max-w-screen-lg px-6 pb-8 pt-20 sm:pt-24 xxl:mx-auto lg:px-8 lg:pt-14 2xl:max-w-screen-xl">
                   <div className="mb-10 xl:grid xl:grid-cols-3 xl:gap-8">
                     <div className="grid grid-cols-2 gap-8 xl:col-span-2">
                       <div className="md:grid md:grid-cols-2 md:gap-8">
@@ -168,7 +168,7 @@ export default function Footer() {
                         </div>
                       </div>
                     </div>
-                    <div className="mt-10 xl:mt-0">
+                    <div className="mt-16 xl:mt-0">
                       <h3 className="text-sm font-semibold leading-6 text-gray-900">
                         Registrera dig till vårt nyhetsbrev
                       </h3>
@@ -183,7 +183,7 @@ export default function Footer() {
                           name="email-address"
                           id="email-address"
                           required
-                          className="w-1/3 min-w-0 appearance-none border-0 bg-white px-3 py-1.5 text-sm text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-white sm:w-64 sm:text-sm sm:leading-6 xl:w-full"
+                          className="appearance-none border-0 bg-white px-3 py-1.5 text-sm text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-white sm:w-64 sm:text-sm sm:leading-6 w-full"
                           placeholder="Registrera din e-postadress"/>
                         <div className="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
                           <button
@@ -196,13 +196,11 @@ export default function Footer() {
                     </div>
                   </div>
                 <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 md:flex md:items-center md:justify-between lg:mt-24">
-                  <div className="flex space-x-6 md:order-2">
                   </div>
-                  <p className="mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0">
+                  <p className="mt-8 text-xs text-center leading-5 text-gray-500 md:order-1 md:mt-0">
                     &copy; 2023 Freaky Fashion
                   </p>
-                </div>
-            </div>
+                </div> 
       </footer>
     )
   }
