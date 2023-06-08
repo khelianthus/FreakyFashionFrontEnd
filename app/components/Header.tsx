@@ -23,7 +23,7 @@ export default function Header() {
 
   useEffect(() => {
     if (!open) {
-      // Basket är stängd
+      // Om basket är stängd
       setOpen(prevOpen => !prevOpen); // Ändra boolean på setOpen
     }
   }, [open]);
@@ -104,9 +104,7 @@ export default function Header() {
               </svg>
               <CartNotification cartQuantity={cartQuantity} />              
             </div>
-            {open && <Basket setCartQuantity={setCartQuantity} />}     
-            {/* <Basket setCartQuantity={setCartQuantity} />         */}
-     
+            {open && <Basket setCartQuantity={setCartQuantity} />}        
             </div>
         </div>
       </nav>
