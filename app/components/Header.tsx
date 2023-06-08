@@ -11,7 +11,6 @@ import Link from 'next/link';
 import Search from './Search'
 import { Basket } from './Basket'
 import CartNotification from './CartNotification';
-import Link from 'next/link';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
