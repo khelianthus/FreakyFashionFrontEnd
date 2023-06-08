@@ -5,6 +5,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
 import { calculateTotalProductPrice, calculateQuantityPrice } from '../components/Basket';
 import Link from 'next/link';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 export default function Checkout() {
   const [products, setProducts] = useState<ProductWithQuantity[]>([]);
@@ -131,9 +132,9 @@ export default function Checkout() {
                         onClick={removeProduct}
                         data-product-id={product.id}
                         type="button"
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                        className="text-gray-400 hover:text-gray-600 mt-6"
                       >
-                        Ta bort
+                        <TrashIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
                     </div>
                   </div>
