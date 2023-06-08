@@ -1,103 +1,133 @@
 'use client'
-import getProductById from "@/app/api/getProductById";
-import { useState, useEffect } from "react";
+
+
+import { useState, useEffect } from 'react'
+import { Disclosure, RadioGroup, Tab } from '@headlessui/react'
+import { StarIcon } from '@heroicons/react/20/solid'
+import { HeartIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline'
+import getProductById from '@/app/api/getProductById'
 
 type Params = {
-    params: {
-        productId: string
-    }
+  params: {
+      productId: string
+  }
 }
 
 export default function Details({params: {productId}}:Params) {
+  const [product, setProduct] = useState<ProductWithQuantity>();
+  const [quantity, setQuantity] = useState(1);
 
-    const [product, setProduct] = useState<ProductWithQuantity>();
-    const [quantity, setQuantity] = useState(1);
+  useEffect(() => {
+      async function fetchData() {
+      const productData = await getProductById(productId);
+      productData.quantity = quantity;
+      setProduct(productData);
+      }
 
-    useEffect(() => {
-        async function fetchData() {
-        const productData = await getProductById(productId);
-        productData.quantity = quantity;
-        setProduct(productData);
-        }
+      fetchData();
+  }, [productId, quantity]);
 
-        fetchData();
-    }, [productId, quantity]);
+  function handleQuantityChange(event: React.ChangeEvent<HTMLSelectElement>) {
+      const newQuantity = parseInt(event.target.value);
+      if (newQuantity >= 1 && newQuantity <= 9) {
+          setQuantity(newQuantity);
+      }
+  }
 
-    function handleQuantityChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const newQuantity = parseInt(event.target.value);
-        if (newQuantity >= 1 && newQuantity <= 9) {
-            setQuantity(newQuantity);
-        }
-    }
+  function AddToLocalStorage() {
+      const productsJSON = localStorage.getItem("cart");
+      const existingProducts = productsJSON ? JSON.parse(productsJSON) : [];
+      const existingProduct = existingProducts.find(
+      (existingProduct: any) => existingProduct.id === product?.id
+      );
 
-    function AddToLocalStorage() {
-        const productsJSON = localStorage.getItem("cart");
-        const existingProducts = productsJSON ? JSON.parse(productsJSON) : [];
-        const existingProduct = existingProducts.find(
-        (existingProduct: any) => existingProduct.id === product?.id
-        );
+      if (existingProduct) {
+      // Om produkten redan finns i varukorgen, öka antalet
+      existingProduct.quantity += quantity;
+      } else {
+      // Annars, lägg till produkten i varukorgen
+      existingProducts.push(product);
+      }
 
-        if (existingProduct) {
-        // Om produkten redan finns i varukorgen, öka antalet
-        existingProduct.quantity += quantity;
-        } else {
-        // Annars, lägg till produkten i varukorgen
-        existingProducts.push(product);
-        }
+      localStorage.setItem("cart", JSON.stringify(existingProducts));
+  }
 
-        localStorage.setItem("cart", JSON.stringify(existingProducts));
-    }
-
-    if (!product) {
-        return <div>Loading...</div>;
-    }
+  if (!product) {
+      return <div>Loading...</div>;
+  }
 
   return (
-    <section className="w-11/12 md:w-3/5 h-screen m-auto flex items-center">
-    <div className="w-full h-full flex flex-col md:flex-row gap-20 items-center "> 
-        <div className="relative">
-            <img className=" w-full h-full"src={product.imageUrl} alt=""/>
-            {/* <div className="arrows w-full justify justify-between absolute inset-y-1/2 flex px-3" >
-                <button><i className="fa-solid fa-chevron-left"></i></button>
-                <button><i className="fa-solid fa-chevron-right"></i></button>
-            </div> */}
-
-        </div>
-        <div className="flex flex-col flex-wrap space-y-5 p-5">
-        {/* <h4 className="text-xl font-semibold">{product.category.name}</h4> */}
-        <h1 className="text-3xl font-bold">{product.name}</h1>
-        <h2 className="text-xl font-bold">{product.price} kr</h2>
-        <p className="text-sm">{product.description}</p>
-        <div className="space-y-5"> 
-            <input className="w-24 h-8 border border-gray-600 outline-0"  
-                placeholder="1" 
-                type="number" 
-                id="amount" 
-                defaultValue={quantity} 
-                min={1}
-                max={9}
-                onChange={handleQuantityChange}
-            />
-            <div>
-                <button className="w-8 h-8 bg-black rounded-full shadow-xl"></button>
-                <button className="w-8 h-8 bg-red-500 rounded-full shadow-xl"></button>
-                <button className="w-8 h-8 bg-blue-500 rounded-full shadow-xl"></button>
-                <button className="w-8 h-8 bg-white border rounded-full shadow-xl"></button>
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+          {/* Image gallery */}
+            {/* Image selector */}
+            <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
+             <img className=" w-full h-full"src={product.imageUrl} alt="Logotyp"/>
             </div>
-        </div>
-        <div className="space-x-5 flex items-center">
-            <button className="flex items-center space-x-2 border border-rose-400 px-5 py-2 rounded-md hover:bg-rose-400 hover:text-white">
-                <i className="fa-regular fa-heart text-xl"></i>
-                <span>Favoriter</span>
-            </button>
-            <button className="bg-rose-400 px-5 py-2 rounded-md text-white hover:bg-white hover:border hover:border-gray-600 hover:text-black" type="submit" onClick={AddToLocalStorage}>
-                <i className="fa-solid fa-cart-shopping"></i>
-                <span>Lägg till varukorg</span>
-            </button>
+          {/* Product info */}
+          <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">{product.name}</h1>
+              <div className="mt-5">
+              <h2 className="sr-only">Product information</h2>
+              <p className="text-3xl tracking-tight text-gray-900">${product.price}</p>
+          </div>
+          <div>
+            <h3 className='mt-5'>{product.brand}</h3>
+          </div>
+            <div className="mt-6">
+              <h3 className="sr-only">Description</h3>
+              <div
+                className="space-y-6 text-base text-gray-700"
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              />
+            </div>
+            {/*Add to basket & favourites*/}
+            
+            <select
+              className="mt-5 w-20 h-10 border border-gray-600 rounded outline-0 text-center"
+              value={product.quantity}
+              data-product-id={product.id}
+              onChange={handleQuantityChange}
+              >
+             {Array.from({ length: 9 }, (_, i) => i + 1).map((quantity) => (
+              <option key={quantity} value={quantity}>{quantity}</option>
+              ))}
+              </select>
+            
+            <form className="mt-6">
+              <div className="mt-10 flex">
+
+
+                <button
+                  type="submit"
+                  className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                  onClick={AddToLocalStorage}
+                >
+                  Add to bag
+                </button>
+
+                <button
+                  type="button"
+                  className="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400  hover:bg-gray-100 hover:text-gray-500"
+                >
+                  <HeartIcon className="h-6 w-6 flex-shrink-0" aria-hidden="true" />
+                  <span className="sr-only">Add to favorites</span>
+                </button>
+              </div>
+            </form>
+
+            <section aria-labelledby="details-heading" className="mt-12">
+              <h2 id="details-heading" className="sr-only">
+                Additional details
+              </h2>
+
+              <div className="divide-y divide-gray-200 border-t">            
+             </div>
+            </section>
+          </div>
         </div>
       </div>
     </div>
-    </section>
-
   )
 }
