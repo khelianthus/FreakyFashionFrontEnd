@@ -7,6 +7,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import Link from 'next/link';
 import Search from './Search'
 import { Basket } from './Basket'
 import CartNotification from './CartNotification';
@@ -58,13 +59,13 @@ export default function Header() {
 
         <div className="flex flex-wrap justify-between items-center mx-auto py-4 px-6 max-w-screen-lg 2xl:max-w-screen-xl ">
           <div className="md:flex items-center">
-            <a href="/">
+            <Link href="/">
               <img
                 src="https://plchldr.co/i/170x50?&bg=000000=FFFFFF&text=logo"
                 className="h-11 mr-5 my-3"
                 alt="Logo"
               /> 
-            </a>
+            </Link>
             <Search/> 
           </div>
 

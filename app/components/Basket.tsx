@@ -3,6 +3,8 @@ import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { TrashIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+
 
 export interface BasketProps {
   setCartQuantity: React.Dispatch<React.SetStateAction<number>>;
@@ -185,12 +187,12 @@ export function Basket({ setCartQuantity }: BasketProps) {
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Frakt och moms beräknas i kassan.</p>
                       <div className="mt-6">
-                        <a
-                          href="../checkout"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                        >
+                        <Link 
+                        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                        href="../checkout"
+                        onClick={() => setCartOpen(false)}>
                           Kassa
-                        </a>
+                          </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
