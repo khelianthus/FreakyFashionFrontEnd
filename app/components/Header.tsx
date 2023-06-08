@@ -47,8 +47,8 @@ export default function Header() {
     <header className="sticky top-0 z-40 bg-gradient-to-r from-lightBeige from-60% to-purple-50">
       <nav className="border-gray-200 -mb-3">
 
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-2xl py-4 px-6">
-          <div className="flex items-center">
+        <div className="flex flex-wrap justify-between items-center mx-auto py-4 px-6 max-w-screen-lg 2xl:max-w-screen-xl ">
+          <div className="md:flex items-center">
             <a href="/">
               <img
                 src="https://plchldr.co/i/170x50?&bg=000000=FFFFFF&text=logo"
@@ -102,9 +102,9 @@ export default function Header() {
       <Popover className="relative">
         <div className="pointer-events-none absolute inset-0 z-30 border-b border-gray-200" aria-hidden="true" />
           <div className="relative z-20">
-            <div className="flex py-5 px-6 mx-auto max-w-screen-2xl">
+            <div className="flex py-5 px-6 mx-auto max-w-screen-lg 2xl:max-w-screen-xl">
               <div className="-my-2 -mr-2 md:hidden">
-                <Popover.Button className="inline-flex items-center justify-center rounded-md  bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <Popover.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                   <span className="sr-only">Open menu</span>
                   <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                 </Popover.Button>

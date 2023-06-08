@@ -5,7 +5,7 @@ export default function PromoSection() {
           <div className="relative">
             <div aria-hidden="true" className="absolute hidden h-full w-1/2 bg-gradient-to-r from-purple-100 to-lime-100 lg:block" />
             <div className="relative bg-gray-100 lg:bg-transparent">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:grid lg:grid-cols-2 lg:px-8">
+              <div className="mx-auto max-w-screen-lg px-4 sm:px-6 lg:grid lg:grid-cols-2 lg:px-8 2xl:max-w-screen-xl">
                 <div className="mx-auto max-w-2xl py-24 lg:py-52 lg:max-w-none">
                   <div className="lg:pr-16">
                     <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl xl:text-6xl">
