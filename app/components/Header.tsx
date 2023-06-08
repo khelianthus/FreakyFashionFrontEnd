@@ -1,12 +1,13 @@
 'use client';
 
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useState, useEffect, useCallback } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { debounce } from "ts-debounce";
 import Search from './Search'
 import { Basket } from './Basket'
 import CartNotification from './CartNotification';
@@ -19,9 +20,17 @@ export default function Header() {
 
   const [open, setOpen] = useState(false)
 
+
+
   const handleOpenCart = () => {
     setOpen(!open);
+    console.log('Click cart from header:', open );
   };
+
+  const handleBasketClose = () => {
+    setOpen(false);
+  };
+  
 
   const [cartQuantity, setCartQuantity] = useState(0);
 
@@ -94,7 +103,9 @@ export default function Header() {
               </svg>
               <CartNotification cartQuantity={cartQuantity} />              
             </div>
-            {open && <Basket setCartQuantity={setCartQuantity} />}          
+            {open && <Basket setCartQuantity={setCartQuantity} />}     
+            {/* <Basket setCartQuantity={setCartQuantity} />         */}
+     
             </div>
         </div>
       </nav>

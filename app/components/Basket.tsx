@@ -25,7 +25,15 @@ export function calculateTotalProductPrice(products: ProductWithQuantity[]) {
 }
 
 export function Basket({ setCartQuantity }: BasketProps) {
-  const [open, setOpen] = useState(true)
+  const [cartOpen, setCartOpen] = useState(false) //ändrat till false
+
+  useEffect(() => {
+    // setOpen(open => open);
+    // setCartOpen(!open); // This is just to ensure that the open state is updated immediately
+    setCartOpen(!cartOpen);
+  }, [setCartOpen]); //setOpen var i array innan, var innan tom array
+
+  // console.log('Open cart: ', open)
   const [products, setProducts] = useState<ProductWithQuantity[]>([]);
   const [quantity, setQuantity] = useState(1);
 
@@ -83,8 +91,8 @@ export function Basket({ setCartQuantity }: BasketProps) {
   };
 
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-50" onClose={setOpen}>
+    <Transition.Root show={cartOpen} as={Fragment}>
+      <Dialog as="div" className="relative z-50" onClose={setCartOpen}>
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
@@ -106,7 +114,10 @@ export function Basket({ setCartQuantity }: BasketProps) {
                           <button
                             type="button"
                             className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => setOpen(false)}
+                            onClick={() => {
+                              setCartOpen(false);
+                              console.log('Closed: ', open);
+                            }}
                           >
                             <span className="sr-only">Stäng panel</span>
                             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -189,7 +200,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
+                            onClick={() => setCartOpen(false)}
                           >
                             Fortsätt Handla
                             <span aria-hidden="true"> &rarr;</span>
