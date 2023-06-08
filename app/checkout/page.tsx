@@ -4,9 +4,12 @@ import { Fragment, useEffect, useState } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
 import { calculateTotalProductPrice, calculateQuantityPrice } from '../components/Basket';
+import Link from 'next/link';
 
 export default function Checkout() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductWithQuantity[]>([]);
+  const [quantity, setQuantity] = useState(1);
+  const [cartQuantity, setCartQuantity] = useState(0);
 
   useEffect(() => {
     const productsJSON = localStorage.getItem('cart');
@@ -33,6 +36,51 @@ export default function Checkout() {
     return totalPrice.toFixed(2);
   }
 
+  function removeProduct(event: React.MouseEvent<HTMLButtonElement>) {
+    const productId = event.currentTarget.getAttribute('data-product-id');
+    if (productId) {
+      const productsJSON = localStorage.getItem('cart');
+      if (productsJSON) {
+        const existingProducts = JSON.parse(productsJSON);
+        const updatedProducts = existingProducts.filter(
+          (product: ProductWithQuantity) => product.id !== parseInt(productId)
+        );
+  
+        const totalQuantity = updatedProducts.reduce((total: number, product: ProductWithQuantity) => total + product.quantity, 0);
+        setCartQuantity(totalQuantity);
+  
+        localStorage.setItem('cart', JSON.stringify(updatedProducts));
+        setProducts(updatedProducts); 
+      }
+    }
+  }
+
+  const handleQuantityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newQuantity = parseInt(event.target.value);
+    if (newQuantity >= 1 && newQuantity <= 9) {
+      setQuantity(newQuantity);
+      const productId = event.currentTarget.getAttribute('data-product-id');
+      if (productId) {
+        updateQuantity(parseInt(productId), newQuantity);
+      }
+    }
+  };
+
+  const updateQuantity = (productId: number, quantity: number) => {
+    const updatedProducts = products.map((product: ProductWithQuantity) => {
+      if (product.id === productId) {
+        return { ...product, quantity }; 
+      }
+      return product;
+    });
+  
+    const totalQuantity = updatedProducts.reduce((total, product) => total + product.quantity, 0);
+    setCartQuantity(totalQuantity);
+  
+    localStorage.setItem('cart', JSON.stringify(updatedProducts));
+    setProducts(updatedProducts);
+  };
+
   const totalPrice = calculateTotalPrice(products)
 
   return (
@@ -56,18 +104,39 @@ export default function Checkout() {
             <ul role="list" className="divide-y divide-gray-200 text-sm font-medium text-gray-900">
               {products.map((product: ProductWithQuantity) => (
                 <li key={product.id} className="flex items-start space-x-4 py-6">
-                  <a href={`details/${product.id}`}>
+                  <Link href={`/details/${product.id}`}>
                     <img
                       src={product.imageUrl}
                       className="h-20 w-20 flex-none rounded-md object-cover object-center"
                     />
-                  </a>
+                  </Link>
                   <div className="flex-auto space-y-1">
                     <h3>{product.name}</h3>
                     <p className="text-gray-500">{product.color}</p>
-                    <p className="text-gray-500">Antal {product.quantity}</p>
+                    <select
+                      className="w-15 h-8 border border-gray-300 outline-0 rounded text-sm/[1] cursor-pointer"
+                      value={product.quantity}
+                      data-product-id={product.id}
+                      onChange={handleQuantityChange}
+                    >
+                      {Array.from({ length: 9 }, (_, i) => i + 1).map((quantity) => (
+                        <option key={quantity} value={quantity}>{quantity}</option>
+                      ))}
+                    </select>
                   </div>
-                  <p className="flex-none text-base font-medium">{calculateQuantityPrice(product)} kr</p>
+                  <div className="flex flex-col items-end justify-between text-sm">
+                  <p className="flex-none text-base font-medium">{calculateQuantityPrice(product)} kr</p>                                       
+                    <div className="flex">
+                      <button
+                        onClick={removeProduct}
+                        data-product-id={product.id}
+                        type="button"
+                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                      >
+                        Ta bort
+                      </button>
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>

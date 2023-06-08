@@ -2,7 +2,9 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link';
 import { TrashIcon } from '@heroicons/react/24/outline';
+
 
 export interface BasketProps {
   setCartQuantity: React.Dispatch<React.SetStateAction<number>>;
@@ -78,7 +80,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
   
   const totalProductPrice = calculateTotalProductPrice(products);
   
-  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleQuantityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newQuantity = parseInt(event.target.value);
     if (newQuantity >= 1 && newQuantity <= 9) {
       setQuantity(newQuantity);
@@ -130,12 +132,12 @@ export function Basket({ setCartQuantity }: BasketProps) {
                             {products.map((product: any) => (
                               <li key={product.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <a href={`/details/${product.id}`}>
-                                    <img
-                                      src={product.imageUrl}                                   
-                                      className="h-full w-full object-cover object-center"
-                                    />
-                                </a>  
+                                  <Link href={`/details/${product.id}`}>
+                                      <img
+                                        src={product.imageUrl}                                   
+                                        className="h-full w-full object-cover object-center"
+                                      />
+                                  </Link>  
                                 </div>
 
                                 <div className="ml-4 flex flex-1 flex-col">
@@ -149,16 +151,17 @@ export function Basket({ setCartQuantity }: BasketProps) {
                                     <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <input className="w-24 h-8 border border-gray-600 outline-0"  
-                                        placeholder={product.quantity.toString()} 
-                                        type="number" 
-                                        id="amount" 
-                                        defaultValue={product.quantity} 
-                                        min={1}
-                                        max={9}
-                                        data-product-id={product.id}
-                                        onChange={handleQuantityChange}
-                                    />
+                                    <select
+                                      className="w-15 h-8 border border-gray-300 outline-0 rounded text-sm/[1] cursor-pointer"
+                                      value={product.quantity}
+                                      data-product-id={product.id}
+                                      onChange={handleQuantityChange}
+                                    >
+                                      {Array.from({ length: 9 }, (_, i) => i + 1).map((quantity) => (
+                                        <option key={quantity} value={quantity}>{quantity}</option>
+                                      ))}
+                                    </select>
+                                    
                                     <div className="flex">
                                       <button
                                         onClick={removeProduct}
