@@ -25,15 +25,13 @@ export function calculateTotalProductPrice(products: ProductWithQuantity[]) {
 }
 
 export function Basket({ setCartQuantity }: BasketProps) {
-  const [cartOpen, setCartOpen] = useState(false) //ändrat till false
+
+  const [cartOpen, setCartOpen] = useState(false) 
 
   useEffect(() => {
-    // setOpen(open => open);
-    // setCartOpen(!open); // This is just to ensure that the open state is updated immediately
     setCartOpen(!cartOpen);
-  }, [setCartOpen]); //setOpen var i array innan, var innan tom array
+  }, [setCartOpen]); 
 
-  // console.log('Open cart: ', open)
   const [products, setProducts] = useState<ProductWithQuantity[]>([]);
   const [quantity, setQuantity] = useState(1);
 

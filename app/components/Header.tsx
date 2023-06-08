@@ -7,7 +7,6 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { debounce } from "ts-debounce";
 import Search from './Search'
 import { Basket } from './Basket'
 import CartNotification from './CartNotification';
@@ -18,20 +17,21 @@ function classNames(...classes: string[]) {
 
 export default function Header() {
 
-  const [open, setOpen] = useState(false)
+  //var först false
+  const [open, setOpen] = useState(true)
 
-
+  useEffect(() => {
+    if (!open) {
+      // Basket är stängd
+      setOpen(prevOpen => !prevOpen); // Ändra boolean på setOpen
+    }
+  }, [open]);
 
   const handleOpenCart = () => {
     setOpen(!open);
     console.log('Click cart from header:', open );
   };
-
-  const handleBasketClose = () => {
-    setOpen(false);
-  };
   
-
   const [cartQuantity, setCartQuantity] = useState(0);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export default function Header() {
             </a>
             <div onClick={handleOpenCart} className="group -m-2 flex items-center p-2">
               <svg
-                className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500 cursor-pointer"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
