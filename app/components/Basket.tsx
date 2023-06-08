@@ -2,6 +2,7 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 export interface BasketProps {
   setCartQuantity: React.Dispatch<React.SetStateAction<number>>;
@@ -163,9 +164,9 @@ export function Basket({ setCartQuantity }: BasketProps) {
                                         onClick={removeProduct}
                                         data-product-id={product.id}
                                         type="button"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        className="text-gray-400 hover:text-gray-600 pb-1"
                                       >
-                                        Ta bort
+                                        <TrashIcon className="h-6 w-6" aria-hidden="true" />
                                       </button>
                                     </div>
                                   </div>
