@@ -10,6 +10,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Search from './Search'
 import { Basket } from './Basket'
 import CartNotification from './CartNotification';
+import Link from 'next/link';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -49,13 +50,13 @@ export default function Header() {
 
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-2xl py-4 px-6">
           <div className="flex items-center">
-            <a href="/">
+            <Link href="/">
               <img
                 src="https://plchldr.co/i/170x50?&bg=000000=FFFFFF&text=logo"
                 className="h-11 mr-5 my-3"
                 alt="Logo"
               /> 
-            </a>
+            </Link>
             <Search/> 
           </div>
 
