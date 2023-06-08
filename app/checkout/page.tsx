@@ -38,8 +38,8 @@ export default function Checkout() {
   return (
     <div className="bg-white">
       {/* Background color split screen for large screens */}
-      <div className="absolute left-0 top-0 hidden h-full w-1/2 bg-white lg:block" aria-hidden="true" />
-      <div className="absolute right-0 top-0 hidden h-full w-1/2 bg-gray-50 lg:block" aria-hidden="true" />
+      <div className="fixed left-0 top-0 hidden h-full w-1/2 bg-white lg:block" aria-hidden="true" />
+      <div className="fixed right-0 top-0 hidden h-full w-1/2 bg-gray-50 lg:block" aria-hidden="true" />
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-16 lg:grid-cols-2 lg:px-8 xl:gap-x-48">
         <h1 className="sr-only">Order information</h1>
@@ -50,7 +50,7 @@ export default function Checkout() {
         >
           <div className="mx-auto max-w-lg lg:max-w-none">
             <h2 id="summary-heading" className="text-lg font-medium text-gray-900">
-              Order sammanfattning
+              Ordersammanfattning
             </h2>
 
             <ul role="list" className="divide-y divide-gray-200 text-sm font-medium text-gray-900">
