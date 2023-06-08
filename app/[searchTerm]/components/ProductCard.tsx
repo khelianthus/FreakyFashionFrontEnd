@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from 'react';
+// import React, { useRef } from 'react';
 import LikeButton from './LikeButton';
 import NewBadge from './NewBadge';
 import Link from 'next/link';
@@ -30,7 +30,7 @@ export default function ProductCard({ result }: Props) {
                         {isYoungerThanOneMonth && <NewBadge />}
                       </Link>
                       <div>
-                        <div className="absolute bottom-2 right-2 w-5">
+                        <div className="absolute bottom-1 right-1">
                           <LikeButton/>
                         </div>
                       </div>
