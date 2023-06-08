@@ -7,6 +7,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import Link from 'next/link';
 import Search from './Search'
 import { Basket } from './Basket'
 import CartNotification from './CartNotification';
@@ -23,7 +24,7 @@ export default function Header() {
 
   useEffect(() => {
     if (!open) {
-      // Basket är stängd
+      // Om basket är stängd
       setOpen(prevOpen => !prevOpen); // Ändra boolean på setOpen
     }
   }, [open]);
@@ -104,9 +105,7 @@ export default function Header() {
               </svg>
               <CartNotification cartQuantity={cartQuantity} />              
             </div>
-            {open && <Basket setCartQuantity={setCartQuantity} />}     
-            {/* <Basket setCartQuantity={setCartQuantity} />         */}
-     
+            {open && <Basket setCartQuantity={setCartQuantity} />}        
             </div>
         </div>
       </nav>
