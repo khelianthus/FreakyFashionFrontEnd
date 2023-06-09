@@ -62,20 +62,20 @@ export default function Details({params: {productId}}:Params) {
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           {/* Image gallery */}
             {/* Image selector */}
-            <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
-             <img className=" w-full h-full"src={product.imageUrl} alt="Logotyp"/>
+            <div className="mx-auto hidden w-full max-w-2xl sm:block lg:max-w-none aspect-h-6 aspect-w-4">
+              <img className="object-cover  h-full" src={product.imageUrl} alt="Logotyp" />
             </div>
           {/* Product info */}
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">{product.name}</h1>
               <div className="mt-5">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight text-gray-900">${product.price}</p>
+              <p className="text-3xl tracking-tight text-gray-900">{product.price} Kr</p>
           </div>
           <div>
-            <h3 className='mt-5'>{product.brand}</h3>
+            <h2 className='mt-5'>{product.brand}</h2>
           </div>
-            <div className="mt-6">
+            <div className="mt-6 mb-10">
               <h3 className="sr-only">Description</h3>
               <div
                 className="space-y-6 text-base text-gray-700"
@@ -83,9 +83,8 @@ export default function Details({params: {productId}}:Params) {
               />
             </div>
             {/*Add to basket & favourites*/}
-            
             <select
-              className="mt-5 w-20 h-10 border border-gray-600 rounded outline-0 text-center"
+              className="mt-5 w-15 h-10 border border-gray-600 rounded outline-0 text-center"
               value={product.quantity}
               data-product-id={product.id}
               onChange={handleQuantityChange}
@@ -94,11 +93,8 @@ export default function Details({params: {productId}}:Params) {
               <option key={quantity} value={quantity}>{quantity}</option>
               ))}
               </select>
-            
             <form className="mt-6">
               <div className="mt-10 flex">
-
-
                 <button
                   type="submit"
                   className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
@@ -116,12 +112,10 @@ export default function Details({params: {productId}}:Params) {
                 </button>
               </div>
             </form>
-
             <section aria-labelledby="details-heading" className="mt-12">
               <h2 id="details-heading" className="sr-only">
                 Additional details
               </h2>
-
               <div className="divide-y divide-gray-200 border-t">            
              </div>
             </section>
