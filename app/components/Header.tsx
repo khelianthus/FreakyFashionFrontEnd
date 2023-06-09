@@ -19,8 +19,15 @@ function classNames(...classes: string[]) {
 export default function Header() {
 
   //var först false
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
 
+  //Denna körs endast en gång i början av genereringen, tvingar då
+  //basket att vara stängd när vi öppnar sajten.
+  useEffect(() => {
+    setOpen(true)
+  }, []);
+
+  //Denna stoppar buggen med att dubbel-klicka för att öppna basket
   useEffect(() => {
     if (!open) {
       // Om basket är stängd
