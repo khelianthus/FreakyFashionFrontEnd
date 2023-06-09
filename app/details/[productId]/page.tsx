@@ -1,11 +1,11 @@
 'use client'
 
-
 import { useState, useEffect } from 'react'
 import { Disclosure, RadioGroup, Tab } from '@headlessui/react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { HeartIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline'
 import getProductById from '@/app/api/getProductById'
+import LikeButton from '@/app/[searchTerm]/components/LikeButton'
 
 type Params = {
   params: {
@@ -93,25 +93,26 @@ export default function Details({params: {productId}}:Params) {
               <option key={quantity} value={quantity}>{quantity}</option>
               ))}
               </select>
-            <form className="mt-6">
-              <div className="mt-10 flex">
+            <div className="mt-6 flex">
+              <form className="flex">
                 <button
-                  type="submit"
+                  type="button"
                   className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
                   onClick={AddToLocalStorage}
                 >
                   Add to bag
                 </button>
-
-                <button
-                  type="button"
-                  className="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400  hover:bg-gray-100 hover:text-gray-500"
-                >
-                  <HeartIcon className="h-6 w-6 flex-shrink-0" aria-hidden="true" />
-                  <span className="sr-only">Add to favorites</span>
-                </button>
-              </div>
             </form>
+            <button
+                  type="button"
+                  className="ml-4 flex items-center justify-center rounded-md px-3 py-3 bg-gray-100 hover:opacity-70"
+                >
+                  <LikeButton />
+                  {/* <HeartIcon className="h-6 w-6 flex-shrink-0" aria-hidden="true" /> */}
+                  <span className="sr-only">Add to favorites</span>
+                  </button>
+                  </div>
+                  
             <section aria-labelledby="details-heading" className="mt-12">
               <h2 id="details-heading" className="sr-only">
                 Additional details

@@ -39,7 +39,7 @@ export default function ProductCard({ result }: Props) {
                     <Link href={`/details/${result.id}`}>
                     <h3 className="mt-4 text-medium font-medium text-gray-900">{result.color} {result.name}</h3>
                     </Link>
-                    <p className="mt-4 font-bold text-gray-900">{result.price} SEK</p>
+                    <p className="mt-4 font-bold text-gray-900">{result.price} kr</p>
                     </div>
                     <p className="italic text-gray-500 text-xs">{result.brand}</p>
                 </div>
