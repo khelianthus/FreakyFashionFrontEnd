@@ -151,7 +151,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <select
-                                      className="w-15 h-8 border border-gray-300 outline-0 rounded text-sm/[1] cursor-pointer"
+                                      className="w-15 h-8 border border-gray-300 outline-0 rounded text-sm/[1] cursor-pointer focus:border-lime-300 focus:ring-lime-300"
                                       value={product.quantity}
                                       data-product-id={product.id}
                                       onChange={handleQuantityChange}
