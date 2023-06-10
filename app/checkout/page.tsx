@@ -115,7 +115,7 @@ export default function Checkout() {
                     <h3>{product.name}</h3>
                     <p className="text-gray-500">{product.color}</p>
                     <select
-                      className="w-15 h-8 border border-gray-300 outline-0 rounded text-sm/[1] cursor-pointer focus:border-lime-300 focus:ring-lime-300"
+                      className="w-15 h-8 border border-gray-300 outline-0 rounded text-sm/[1] cursor-pointer focus:border-lime-200 focus:ring-lime-200"
                       value={product.quantity}
                       data-product-id={product.id}
                       onChange={handleQuantityChange}
@@ -242,7 +242,7 @@ export default function Checkout() {
                       id="email-address"
                       name="email-address"
                       autoComplete="email"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-300 focus:ring-lime-300 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -257,7 +257,7 @@ export default function Checkout() {
                       id="email-address"
                       name="email-address"
                       autoComplete="email"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-300 focus:ring-lime-300 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -272,7 +272,7 @@ export default function Checkout() {
                       id="email-address"
                       name="email-address"
                       autoComplete="email"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-300 focus:ring-lime-300 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -298,7 +298,7 @@ export default function Checkout() {
                       id="address"
                       name="address"
                       autoComplete="street-address"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-300 focus:ring-lime-300 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -313,7 +313,7 @@ export default function Checkout() {
                       id="city"
                       name="city"
                       autoComplete="address-level2"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-300 focus:ring-lime-300 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -328,7 +328,7 @@ export default function Checkout() {
                       id="region"
                       name="region"
                       autoComplete="address-level1"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-300 focus:ring-lime-300 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -343,7 +343,7 @@ export default function Checkout() {
                       id="postal-code"
                       name="postal-code"
                       autoComplete="postal-code"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-300 focus:ring-lime-300 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -361,7 +361,7 @@ export default function Checkout() {
                   name="same-as-shipping"
                   type="checkbox"
                   defaultChecked
-                  className="h-4 w-4 rounded border-gray-300 text-lime-500 focus:ring-lime-300"
+                  className="h-4 w-4 rounded border-gray-300 text-lime-400 focus:ring-lime-200"
                 />
                 <div className="ml-2">
                   <label htmlFor="same-as-shipping" className="text-sm font-medium text-gray-900">
@@ -374,7 +374,7 @@ export default function Checkout() {
             <div className="mt-10 border-t border-gray-200 pt-6 sm:flex sm:items-center sm:justify-between">
               <button
                 type="submit"
-                className="w-full rounded-md border border-transparent bg-lime-300 px-4 py-2 text-sm font-medium shadow-sm hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-300 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last sm:ml-6 sm:w-auto"
+                className="w-full rounded-md border border-transparent bg-lime-200 px-4 py-2 text-sm font-medium shadow-sm hover:bg-lime-300 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last sm:ml-6 sm:w-auto"
               >
                 Fortsätt
               </button>

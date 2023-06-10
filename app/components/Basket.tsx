@@ -188,7 +188,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
                       <p className="mt-0.5 text-sm text-gray-500">Frakt och moms beräknas i kassan.</p>
                       <div className="mt-6">
                         <Link 
-                        className="flex items-center justify-center rounded-md border border-transparent bg-lime-300 px-6 py-3 text-base font-medium shadow-sm hover:bg-lime-400"
+                        className="flex items-center justify-center rounded-md border border-transparent bg-lime-200 px-6 py-3 text-base font-medium shadow-sm hover:bg-lime-300"
                         href="../checkout"
                         onClick={() => setCartOpen(false)}>
                           Kassa
