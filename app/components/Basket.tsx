@@ -151,7 +151,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <select
-                                      className="w-15 h-8 border border-gray-300 outline-0 rounded text-sm/[1] cursor-pointer focus:border-lime-300 focus:ring-lime-300"
+                                      className="w-15 h-8 border border-gray-300 outline-0 rounded text-sm/[1] cursor-pointer focus:border-lime-200 focus:ring-lime-200"
                                       value={product.quantity}
                                       data-product-id={product.id}
                                       onChange={handleQuantityChange}
@@ -188,7 +188,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
                       <p className="mt-0.5 text-sm text-gray-500">Frakt och moms beräknas i kassan.</p>
                       <div className="mt-6">
                         <Link 
-                        className="flex items-center justify-center rounded-md border border-transparent bg-lime-200 px-6 py-3 text-base font-medium shadow-sm hover:bg-lime-300"
+                        className="flex items-center justify-center rounded-md border border-transparent bg-lime-100 px-6 py-3 text-base font-medium shadow-sm hover:bg-lime-200"
                         href="../checkout"
                         onClick={() => setCartOpen(false)}>
                           Kassa

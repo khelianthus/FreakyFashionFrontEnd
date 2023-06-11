@@ -52,6 +52,7 @@ export default function Checkout() {
   
         localStorage.setItem('cart', JSON.stringify(updatedProducts));
         setProducts(updatedProducts); 
+        window.location.reload();
       }
     }
   }
@@ -63,6 +64,7 @@ export default function Checkout() {
       const productId = event.currentTarget.getAttribute('data-product-id');
       if (productId) {
         updateQuantity(parseInt(productId), newQuantity);
+        window.location.reload();
       }
     }
   };
@@ -361,7 +363,7 @@ export default function Checkout() {
                   name="same-as-shipping"
                   type="checkbox"
                   defaultChecked
-                  className="h-4 w-4 rounded border-gray-300 text-lime-400 focus:ring-lime-200"
+                  className="h-4 w-4 rounded border-gray-300 text-lime-300 focus:ring-lime-200"
                 />
                 <div className="ml-2">
                   <label htmlFor="same-as-shipping" className="text-sm font-medium text-gray-900">
@@ -374,7 +376,7 @@ export default function Checkout() {
             <div className="mt-10 border-t border-gray-200 pt-6 sm:flex sm:items-center sm:justify-between">
               <button
                 type="submit"
-                className="w-full rounded-md border border-transparent bg-lime-200 px-4 py-2 text-sm font-medium shadow-sm hover:bg-lime-300 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last sm:ml-6 sm:w-auto"
+                className="w-full rounded-md border border-transparent bg-lime-100 px-4 py-2 text-sm font-medium shadow-sm hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last sm:ml-6 sm:w-auto"
               >
                 Fortsätt
               </button>
