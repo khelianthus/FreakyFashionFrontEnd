@@ -131,7 +131,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
                             {products.map((product: any) => (
                               <li key={product.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                  <Link href={`/details/${product.id}`}>
+                                  <Link href={`/details/${product.id}`} onClick={() => setCartOpen(false)}>
                                       <img
                                         src={product.imageUrl}                                   
                                         className="h-full w-full object-cover object-center"
@@ -151,7 +151,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <select
-                                      className="w-15 h-8 border border-gray-300 outline-0 rounded text-sm/[1] cursor-pointer"
+                                      className="w-15 h-8 border border-gray-300 outline-0 rounded text-sm/[1] cursor-pointer focus:border-lime-200 focus:ring-lime-200"
                                       value={product.quantity}
                                       data-product-id={product.id}
                                       onChange={handleQuantityChange}
@@ -188,7 +188,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
                       <p className="mt-0.5 text-sm text-gray-500">Frakt och moms beräknas i kassan.</p>
                       <div className="mt-6">
                         <Link 
-                        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                        className="flex items-center justify-center rounded-md border border-transparent bg-lime-100 px-6 py-3 text-base font-medium shadow-sm hover:bg-lime-200"
                         href="../checkout"
                         onClick={() => setCartOpen(false)}>
                           Kassa
@@ -200,7 +200,7 @@ export function Basket({ setCartQuantity }: BasketProps) {
                           <br />
                           <button
                             type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                            className="font-medium text-lime-500 hover:text-lime-400"
                             onClick={() => setCartOpen(false)}
                           >
                             Fortsätt Handla
