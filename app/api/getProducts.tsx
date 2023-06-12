@@ -2,9 +2,16 @@ import getCategories from "./getCategories";
 
 export default async function getProducts(searchTerm: string) {
 
-    const searchParams = new URLSearchParams();
-    searchParams.set('search', searchTerm);
+    const encodedSearchTerm = searchTerm.includes('%')
+    ? searchTerm
+    : encodeURIComponent(searchTerm);
 
+    const searchParams = new URLSearchParams();
+    searchParams.set('search', encodedSearchTerm);
+
+    const url = `http://localhost:5000/products?${searchParams.toString()}`;
+    console.log(url);
+    
     const response = await fetch('http://localhost:5000/products?' + searchParams,
      { next: { revalidate: 10 }
     });

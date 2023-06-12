@@ -14,8 +14,6 @@ const LikeButton = () => {
   };
 
   return (
-    // rounded-full bg-white border-4 border-white
-    //class="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400  hover:bg-gray-100 hover:text-gray-500"
     <button className={`like-button ${isClicked && 'liked'}  w-10 h-10`}  onClick={handleClick}>
       <span className="likes-counter bottom-1 flex justify-center items-center rounded-md border-4 bg-opacity-60 border-opacity-10 border-stone-100 bg-stone-100 m-1 hover:opacity-70 ">
         {isClicked ? (
