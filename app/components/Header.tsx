@@ -11,6 +11,7 @@ import Link from 'next/link';
 import Search from './Search'
 import { Basket } from './Basket'
 import CartNotification from './CartNotification';
+import getCategories from '../api/getCategories';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -21,9 +22,16 @@ export default function Header() {
   //var först false
   const [open, setOpen] = useState(false)
 
+  const [categories, setCategories] = useState<Category[]>([]);
+
   //Denna körs endast en gång i början av genereringen, tvingar då
   //basket att vara stängd när vi öppnar sajten.
   useEffect(() => {
+    async function fetchData() {
+      const categoriesData = await getCategories();
+      setCategories(categoriesData);
+      }
+    fetchData();
     setOpen(true)
   }, []);
 
@@ -167,7 +175,22 @@ export default function Header() {
                       >
                         <Popover.Panel className="absolute inset-x-0 top-full z-10 hidden transform bg-white md:block ">
                         <div className="pl-36 pt-4 pb-10 divide-y divide-gray-300">
-                          
+                        {categories.map((category) => (
+                            <Link
+                              key={category.id}
+                              href={`/categories/${category.id}`}
+                              className="flex flex-col py-4"
+                            >
+                              <div className="flex lg:flex-col md:-mt-3">
+                                <div className="ml-4 md:flex md:flex-1 md:flex-col md:justify-between lg:ml-0 lg:mt-4 ">
+                                  <div>
+                                    <Popover.Button className="text-sm font-medium text-gray-600 hover:text-gray-900">{category.name}
+                                    </Popover.Button>
+                                  </div>
+                                </div>
+                              </div>
+                            </Link>
+                          ))}
                         </div>
                         </Popover.Panel>
                       </Transition>
