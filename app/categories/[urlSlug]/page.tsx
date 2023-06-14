@@ -1,7 +1,7 @@
 "use client";
 
 import ProductCard from '@/app/[searchTerm]/components/ProductCard';
-import getCategoryById from '@/app/api/getCategoryByUrlSlug';
+import getCategoryByUrlSlug from '@/app/api/getCategoryByUrlSlug';
 import { useState, useEffect } from 'react'
 
 type Params = {
@@ -16,7 +16,7 @@ export default function Category({params: {urlSlug}}:Params) {
 
     useEffect(() => {
         async function fetchData() {
-        const categoryData = await getCategoryById(urlSlug);
+        const categoryData = await getCategoryByUrlSlug(urlSlug);
         setCategory(categoryData);
         }
         fetchData();
@@ -28,8 +28,6 @@ export default function Category({params: {urlSlug}}:Params) {
     else
     {
         const products = category.products
-
-       
         const content = (
             <main className="mx-auto min-h-min">
               <h1 className="mt-5 text-xl text-gray-500 text-center p-1">"{category.name}"</h1>
