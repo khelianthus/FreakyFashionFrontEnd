@@ -1,22 +1,22 @@
 "use client";
 
 import ProductCard from '@/app/[searchTerm]/components/ProductCard';
-import getCategoryById from '@/app/api/getCategoryById';
+import getCategoryByUrlSlug from '@/app/api/getCategoryByUrlSlug';
 import { useState, useEffect } from 'react'
 
 type Params = {
     params: {
-        categoryId: number
+        urlSlug: string
     }
   }
 
-export default function Category({params: {categoryId}}:Params) {
+export default function Category({params: {urlSlug}}:Params) {
 
     const [category, setCategory] = useState<Category>();
 
     useEffect(() => {
         async function fetchData() {
-        const categoryData = await getCategoryById(categoryId);
+        const categoryData = await getCategoryByUrlSlug(urlSlug);
         setCategory(categoryData);
         }
         fetchData();

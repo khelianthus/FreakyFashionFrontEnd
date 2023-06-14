@@ -1,3 +1,4 @@
+import Link from "next/link";
 import getCategories from "../api/getCategories"
 
 export default async function Categories() {
@@ -38,10 +39,10 @@ export default async function Categories() {
                     </div>
                     <div className="mt-2">
                       <h3 className="mt-1 font-medium text-sm text-gray-900 uppercase">
-                        <a href="#">
+                        <Link href={`/categories/${category.urlSlug}`}>
                           <span className="absolute inset-0"/>
                           {category.name}
-                        </a>
+                        </Link>
                       </h3>
                     </div>
                   </div>

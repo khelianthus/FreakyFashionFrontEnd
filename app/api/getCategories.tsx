@@ -12,6 +12,7 @@ export default async function getCategories() {
         return {
           id: item.id,
           name: item.name,
+          urlSlug: item.urlSlug,
           products: item.products
         };
       });

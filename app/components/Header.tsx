@@ -178,7 +178,7 @@ export default function Header() {
                         {categories.map((category) => (
                             <Link
                               key={category.id}
-                              href={`/categories/${category.id}`}
+                              href={`/categories/${category.urlSlug}`}
                               className="flex flex-col py-4"
                             >
                               <div className="flex lg:flex-col md:-mt-3">

@@ -56,5 +56,6 @@ type ProductWithQuantity = {
 type Category = {
     id: number,
     name: string,
+    urlSlug: string,
     products: Product[];
 }
