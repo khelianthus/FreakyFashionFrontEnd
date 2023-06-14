@@ -85,7 +85,7 @@ export default function Header() {
           </div>
 
           <div className="flex items-center">
-            <Link href="/account/login" className="p-4 text-gray-400 hover:text-gray-500 lg:ml-4">
+            <Link href="/account/login" className="-ml-3 p-4 text-gray-400 hover:text-gray-500 lg:ml-4">
               <span className="sr-only">Account</span>
               <svg
                 className="h-6 w-6"
@@ -128,22 +128,20 @@ export default function Header() {
         <div className="pointer-events-none absolute inset-0 z-30 border-b border-gray-200" aria-hidden="true" />
           <div className="relative z-20">
             <div className="flex py-5 px-6 mx-auto max-w-screen-lg 2xl:max-w-screen-xl">
-              <div className="-my-2 -mr-2 md:hidden">
-                <Popover.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+              <div className="-my-2 -mr-1 md:hidden">
+                <Popover.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none">
                   <span className="sr-only">Open menu</span>
                   <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                 </Popover.Button>
               </div>
             
               <Popover.Group as="nav" className="hidden md:flex justify-start divide-x divide-gray-300 space-x-3">
-                <a href="#" className="text-base text-gray-900 hover:underline underline-offset-8 decoration-2">
+                <Link href="#" className="text-base text-gray-900 hover:underline underline-offset-8 decoration-2">
                   NYHETER
-                </a>
-                <a href="#" className="text-base text-gray-900 hover:underline underline-offset-8 decoration-2 pl-3">
+                </Link>
+                <Link href="#" className="text-base text-gray-900 hover:underline underline-offset-8 decoration-2 pl-3">
                   TOPPLISTAN
-                </a>
-
-                {/* Dropdown-menyn skalar inte tillsammans med resten av navbaren. Återkommer till detta + ändringar i dess layout*/}
+                </Link>
 
                 <Popover>
                   {({ open }) => (
@@ -173,23 +171,16 @@ export default function Header() {
                         leaveFrom="opacity-100 translate-y-0"
                         leaveTo="opacity-0 -translate-y-1"
                       >
-                        <Popover.Panel className="absolute inset-x-0 top-full z-10 hidden transform bg-white md:block ">
-                        <div className="pl-36 pt-4 pb-10 divide-y divide-gray-300">
+                        <Popover.Panel className="absolute inset-x-0 top-full z-10 hidden transform bg-gradient-to-r from-lightBeige from-60% to-purple-50 md:block">
+                        <div className="divide-y divide-gray-300 pl-5 py-3 lg:mx-auto xl:max-w-screen-lg 2xl:max-w-screen-xl">
                         {categories.map((category) => (
-                            <Link
-                              key={category.id}
-                              href={`/categories/${category.urlSlug}`}
-                              className="flex flex-col py-4"
-                            >
-                              <div className="flex lg:flex-col md:-mt-3">
-                                <div className="ml-4 md:flex md:flex-1 md:flex-col md:justify-between lg:ml-0 lg:mt-4 ">
-                                  <div>
-                                    <Popover.Button className="text-sm font-medium text-gray-600 hover:text-gray-900">{category.name}
-                                    </Popover.Button>
-                                  </div>
-                                </div>
-                              </div>
-                            </Link>
+                            <div key={category.id}>
+                                <Link
+                                    href={`/categories/${category.urlSlug}`}
+                                    className="">
+                                    <Popover.Button className="text-sm font-medium py-4 text-gray-600 hover:text-gray-900">{category.name}</Popover.Button>
+                                </Link>
+                            </div>
                           ))}
                         </div>
                         </Popover.Panel>
@@ -197,20 +188,17 @@ export default function Header() {
                     </>
                   )}
                 </Popover> 
-                <a href="#" className="text-base text-gray-900 hover:underline underline-offset-8 decoration-2 pl-3">
+                <Link href="#" className="text-base text-gray-900 hover:underline underline-offset-8 decoration-2 pl-3">
                   ACCESSOARER
-                </a>
-                <a href="#" className="text-base text-gray-900 hover:underline underline-offset-8 decoration-2 pl-3">
+                </Link>
+                <Link href="#" className="text-base text-gray-900 hover:underline underline-offset-8 decoration-2 pl-3">
                   SKOR
-                </a>
+                </Link>
               </Popover.Group> 
             </div>
           </div>
 
-        {/* Bortkommenterad kod = anpassning av menyn i mobilläge. Fungerar inte ännu. 
-        
-        
-          <Transition
+        <Transition
           as={Fragment}
           enter="duration-200 ease-out"
           enterFrom="opacity-0 scale-95"
@@ -223,18 +211,11 @@ export default function Header() {
             focus
             className="absolute inset-x-0 top-0 z-30 origin-top-right transform p-2 transition md:hidden"
           >
-            <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            <div className="divide-y-2 divide-gray-50 bg-gradient-to-r from-lightBeige from-60% to-purple-50 shadow-lg ring-1 ring-black ring-opacity-5">
               <div className="px-5 pb-6 pt-5 sm:pb-8">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                      alt="Your Company"
-                    />
-                  </div>
                   <div className="-mr-2">
-                    <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <Popover.Button className="inline-flex items-center justify-center rounded-md bg-lightBeige p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none">
                       <span className="sr-only">Close menu</span>
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                     </Popover.Button>
@@ -243,44 +224,21 @@ export default function Header() {
                 <div className="mt-6 sm:mt-8">
                   <nav>
                     <div className="grid gap-7 sm:grid-cols-2 sm:gap-x-4 sm:gap-y-8">
-                      {categories.map((item) => (
+                      {categories.map((category) => (
                         <a
-                          key={item.name}
-                          href={item.href}
+                          key={category.id}
+                          href={`/categories/${category.urlSlug}`}
                           className="-m-3 flex items-center rounded-lg p-3 hover:bg-gray-50">
-                          <div className="ml-4 text-base font-medium text-gray-900">{item.name}</div>
+                          <div className="ml-4 text-base font-medium text-gray-900">{category.name}</div>
                         </a>
                       ))}
                     </div>
-                    <div className="mt-8 text-base">
-                      <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                        View all products
-                        <span aria-hidden="true"> &rarr;</span>
-                      </a>
-                    </div>
                   </nav>
                 </div>
-              </div>
-              <div className="px-5 py-6">
-                
-                <div className="mt-6">
-                  <a
-                    href="#"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                  >
-                    Sign up
-                  </a>
-                  <p className="mt-6 text-center text-base font-medium text-gray-500">
-                    Existing customer?{' '}
-                    <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                      Sign in
-                    </a>
-                  </p>
-                </div>
-              </div>
+              </div>   
             </div>
           </Popover.Panel>
-        </Transition> */}
+        </Transition>
       </Popover>
     </header>
   )
