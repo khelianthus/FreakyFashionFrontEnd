@@ -1,20 +1,21 @@
 import getAllProducts from "../api/getAllProducts"
 import ProductCard from "../[searchTerm]/components/ProductCard"
+import Link from "next/link"
 
 export default async function PopularProducts() {
     
   const productsData: Promise<Product[]> = getAllProducts()
 
     const products = (await productsData)
-      .reverse()  //Tillfällig kod. Ska filtreras utifrån likes
-      .slice(0 ,6)
+      .sort((a, b) => b.likes - a.likes)
+      .slice (0, 6)
 
     const content = (
     <div className="bg-white">
       <div className="mx-auto max-w-screen-lg px-4 py-10 sm:px-6 sm:py-12 lg:px-8 2xl:max-w-screen-xl">
         <div className="sm:flex sm:items-baseline sm:justify-between">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Populära produkter</h2>
-          <a href="#" className="hidden text-sm font-semibold text-gray-700 hover:text-gray-900 sm:block">
+          <a href="/products" className="hidden text-sm font-semibold text-gray-700 hover:text-gray-900 sm:block">
             Se alla produkter
             <span aria-hidden="true"> &rarr;</span>
           </a>
@@ -26,20 +27,17 @@ export default async function PopularProducts() {
             <ProductCard key={product.id} result={product} />
           ))}
         </div>
-       
       </div>
-   
 
         <div className="mt-6 sm:hidden">
-          <a href="#" className="block text-sm font-semibold text-gray-700 hover:text-gray-900">
+          <Link href="/products" className="block text-sm font-semibold text-gray-700 hover:text-gray-900">
             Se alla produkter
             <span aria-hidden="true"> &rarr;</span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
      )
 
     return content;
-
 }
