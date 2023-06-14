@@ -15,10 +15,6 @@ export default async function Categories() {
       <div className="py-10 sm:py-10 mx-auto max-w-screen-lg lg:px-4 2xl:max-w-screen-xl">
         <div className="flex items-center justify-between px-4 sm:px-6 lg:px-0">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900"></h2>
-          <a href="#" className="hidden text-sm font-semibold text-gray-700 hover:text-gray-900 sm:block">
-            Se alla kategorier
-            <span aria-hidden="true"> &rarr;</span>
-          </a>
         </div>
 
         <div className="relative mt-5">
