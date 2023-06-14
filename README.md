@@ -18,6 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - npm install react @headlessui/react @heroicons/react
 - npm install -D @tailwindcss/aspect-ratio
 - npm install tailwindcss @tailwindcss/typography
+- npm install react-icons
 
 ## Run backend
 
