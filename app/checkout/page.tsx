@@ -244,6 +244,7 @@ export default function Checkout() {
                       id="email-address"
                       name="email-address"
                       autoComplete="email"
+                      required 
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
@@ -259,6 +260,7 @@ export default function Checkout() {
                       id="email-address"
                       name="email-address"
                       autoComplete="email"
+                      required 
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
@@ -274,6 +276,7 @@ export default function Checkout() {
                       id="email-address"
                       name="email-address"
                       autoComplete="email"
+                      required 
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
@@ -300,6 +303,7 @@ export default function Checkout() {
                       id="address"
                       name="address"
                       autoComplete="street-address"
+                      required 
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
@@ -315,6 +319,7 @@ export default function Checkout() {
                       id="city"
                       name="city"
                       autoComplete="address-level2"
+                      required 
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
@@ -330,6 +335,7 @@ export default function Checkout() {
                       id="region"
                       name="region"
                       autoComplete="address-level1"
+                      required 
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>
@@ -345,6 +351,7 @@ export default function Checkout() {
                       id="postal-code"
                       name="postal-code"
                       autoComplete="postal-code"
+                      required 
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                     />
                   </div>

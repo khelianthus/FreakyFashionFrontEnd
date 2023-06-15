@@ -70,7 +70,7 @@ export default function Login() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                   Email adress
@@ -116,7 +116,6 @@ export default function Login() {
                 <button
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-lime-100 hover:bg-lime-200 px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                  onClick={handleSubmit}
                 >
                   Logga in
                 </button>
