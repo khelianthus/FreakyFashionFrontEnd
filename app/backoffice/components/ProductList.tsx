@@ -32,12 +32,12 @@ export default function ProductList() {
   const content = (
     <ul role="list" className="divide-y divide-gray-100 mt-5">
       {products.map((product) => (
-        <li key={product.category} className="flex justify-between gap-x-6 py-5">
+        <li key={product.id} className="flex justify-between gap-x-6 py-5">
           <div className="flex gap-x-4">
             <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={product.imageUrl} alt="" />
             <div className="min-w-0 flex-auto">
               <p className="text-sm font-semibold leading-6 text-gray-900">
-              <a href={`/productinfo/${product.urlSlug}`} className="hover:underline">
+              <a href={`/backoffice/productdetails/${product.urlSlug}`} className="hover:underline">
                 {product.color} {product.name}
               </a>
               </p>
