@@ -18,6 +18,8 @@ export default function ProductList() {
       try {
         const productsData: Product[] = await getAllProducts();
         setProducts(productsData);
+
+        console.log('Productsdata:',productsData)
       } catch (error) {
         // Handle error
       }
@@ -25,6 +27,7 @@ export default function ProductList() {
 
     fetchProducts();
   }, []);
+
 
   const content = (
     <ul role="list" className="divide-y divide-gray-100 mt-5">
@@ -46,7 +49,7 @@ export default function ProductList() {
           <div className="flex items-center gap-x-6">
             <div className="hidden sm:flex sm:flex-col sm:items-end">
               <p className="text-sm leading-6 text-gray-900">{product.category}</p>
-              {product.createdat ? (
+              {/* {product.createdat ? (
                 <p className="mt-1 text-xs leading-5 text-gray-500">
                 </p>
               ) : (
@@ -56,7 +59,7 @@ export default function ProductList() {
                   </div>
                   <p className="text-xs leading-5 text-gray-500">Online</p>
                 </div>
-              )}
+              )} */}
             </div>
             <Menu as="div" className="relative flex-none">
               <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
@@ -75,31 +78,19 @@ export default function ProductList() {
                 <Menu.Items className="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
                   <Menu.Item>
                   {({ active }) => (
-                        <Link href={`/backoffice/productdetails/${product.urlSlug}`} className={classNames(
+                        <Link href={`/backoffice/productdetails/${product.urlSlug}`} 
+                          className={classNames(
                           active ? 'bg-gray-50' : '',
                           'block px-3 py-1 text-sm leading-6 text-gray-900'
                         )}>
+                          
                           Inspektera<span className="sr-only">, {product.name}</span>
                         </Link>
                       )}
-                      
-                      {/* onClick={() => handleProductClick(product.id)} */}
-
-                    {/* {({ active }) => (
-                      <a
-                        href="/productdetails/${product.Id}"
-                        className={classNames(
-                          active ? 'bg-gray-50' : '',
-                          'block px-3 py-1 text-sm leading-6 text-gray-900'
-                        )}
-                      >
-                        Inspektera<span className="sr-only">, {product.name}</span>
-                      </a>
-                    )} */}
-
                   </Menu.Item>
                   <Menu.Item>
-                    {({ active }) => (
+                    {({ active }) => {console.log(product.urlSlug); return(
+                      
                       <a
                         href="/productdetails/${product.Id}"
                         className={classNames(
@@ -109,7 +100,8 @@ export default function ProductList() {
                       >
                         <span className="text-color-red">Radera</span><span className="sr-only">, {product.name}</span>
                       </a>
-                    )}
+
+                    )}}
                   </Menu.Item>
                 </Menu.Items>
               </Transition>

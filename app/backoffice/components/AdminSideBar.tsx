@@ -33,20 +33,7 @@ export default function AdminSideBar() {
     <>
       {/* <div> */}
         <Transition.Root show={sidebarOpen} as={Fragment}>
-        {/* */}
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
-            {/* <Transition.Child
-              as={Fragment}
-              enter="transition-opacity ease-linear duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="transition-opacity ease-linear duration-300"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <div className="fixed inset-0 bg-gray-900/80" />
-            </Transition.Child> */}
-
             {/* fixed */}
             <div className=" fixed inset-0 flex">
               <Transition.Child
@@ -77,8 +64,8 @@ export default function AdminSideBar() {
                   </Transition.Child>
                   <div className="flex flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4 pr-20">
                   {/* h-10 */}
-                    <div className="flex  shrink-0 items-center gap-2">
-                        <span className="text-lg">Administration</span>
+                    <div className="flex shrink-0 items-center gap-2">
+                        <span className="text-lg text-gray-700">Administration</span>
                     </div>
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -151,7 +138,7 @@ export default function AdminSideBar() {
         <div className="hidden  lg:flex lg:w-72 lg:flex-col">
           <div className="flex  flex-col gap-y-2 mt-4 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
             <div className="flex h-10 shrink-0 items-center">
-                <span className="text-lg ">Administration</span>
+                <span className="text-lg  text-gray-700">Administration</span>
             </div>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
