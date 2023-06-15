@@ -36,19 +36,28 @@ export default function Register() {
                 body: JSON.stringify(userData),
             });
 
-            alert('Registreringen lyckades!');
+            if(response.ok){
+                alert('Registreringen lyckades!');
+                window.location.replace('/account/login');
+            }
+            else{
+                const errorData = await response.json();
+                const errors = errorData.errors || {};
+                
+                console.error('Ogiltiga uppgifter:', errors);
 
-            window.location.replace('/account/login');
+                alert(`Ogiltiga uppgifter!`);
+            }
 
         } catch (error) {
-        console.error(error);
+            console.error('Något gick fel:', error);
         }
     };
 
     return (
       <>
         <div className="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 lg:grid-cols-3">
-            <form className="px-4 pb-1 mb-10 lg:col-start-2 lg:row-start-1">
+            <form className="px-4 pb-1 mb-10 lg:col-start-2 lg:row-start-1" onSubmit={handleSubmit}>
                 <div className="mx-auto max-w-lg lg:max-w-none">
                     <h2 className="mt-12 text-2xl font-bold text-gray-900 sm:col-span-full text-center">
                         Registrera användare
@@ -67,6 +76,7 @@ export default function Register() {
                                 autoComplete="first-name"
                                 value={firstName} 
                                 onChange={(e) => setFirstName(e.target.value)}
+                                required 
                                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                                 />
                             </div>
@@ -84,6 +94,7 @@ export default function Register() {
                                 autoComplete="last-name"
                                 value={lastName} 
                                 onChange={(e) => setLastName(e.target.value)}
+                                required 
                                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                                 />
                             </div>
@@ -105,6 +116,7 @@ export default function Register() {
                                 autoComplete="address"
                                 value={address} 
                                 onChange={(e) => setAddress(e.target.value)}
+                                required 
                                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                                 />
                             </div>
@@ -122,6 +134,7 @@ export default function Register() {
                                 autoComplete="city"
                                 value={city} 
                                 onChange={(e) => setCity(e.target.value)}
+                                required 
                                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                                 />
                             </div>
@@ -139,6 +152,7 @@ export default function Register() {
                                 autoComplete="region"
                                 value={region} 
                                 onChange={(e) => setRegion(e.target.value)}
+                                required 
                                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                                 />
                             </div>
@@ -156,6 +170,7 @@ export default function Register() {
                                 autoComplete="postal-code"
                                 value={postalCode} 
                                 onChange={(e) => setPostalCode(e.target.value)}
+                                required 
                                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                                 />
                             </div>
@@ -176,6 +191,7 @@ export default function Register() {
                                 autoComplete="email"
                                 value={email} 
                                 onChange={(e) => setEmail(e.target.value)}
+                                required 
                                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                                 />
                             </div>
@@ -193,6 +209,7 @@ export default function Register() {
                                 autoComplete="new-password"
                                 value={password} 
                                 onChange={(e) => setPassword(e.target.value)}
+                                required 
                                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-200 focus:ring-lime-200 sm:text-sm"
                                 />
                             </div>
@@ -207,8 +224,7 @@ export default function Register() {
                     </Link>
                     <button
                         type="submit"
-                        className="rounded-md bg-lime-100 hover:bg-lime-200 px-3 py-2 text-sm font-semibold shadow-sm"
-                        onClick={handleSubmit}
+                        className="rounded-md bg-lime-100 hover:bg-lime-200 px-3 py-2 text-sm font-semibold shadow-sm"                      
                         >
                         Spara
                     </button>
