@@ -1,23 +1,25 @@
+'use client'
+
 import { useState, useEffect } from 'react';
 import getProductById from '@/app/api/getProductById';
 
 type Params = {
   params: {
-    productId: string;
+    urlSlug: string;
   };
 };
 
-export default function ProductInformation({ params: { productId } }: Params) {
+export default function ProductInformation({ params: { urlSlug } }: Params) {
   const [product, setProduct] = useState<Product | undefined>();
 
   useEffect(() => {
     async function fetchData() {
-      const productData = await getProductById(productId);
+      const productData = await getProductById(urlSlug);
       setProduct(productData);
     }
 
     fetchData();
-  }, [productId]);
+  }, [urlSlug]);
 
   return (
     <div>
@@ -55,7 +57,7 @@ export default function ProductInformation({ params: { productId } }: Params) {
           </div>
         </div>
       ) : (
-        <h2 className="p-2 text-xl">{`${productId} laddas...`}</h2>
+        <h2 className="p-2 text-xl">{`Produkt laddas...`}</h2>
       )}
     </div>
   );

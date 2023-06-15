@@ -3,7 +3,6 @@ import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { useEffect, useState } from 'react';
 import getAllProducts from '@/app/api/getAllProducts'
-import ProductDetails from '../productdetails/page'
 import Link from 'next/link';
 
 function classNames(...classes: string[]) {
@@ -26,16 +25,6 @@ export default function ProductList() {
 
     fetchProducts();
   }, []);
-
-
-  // const productsData: Promise<Product[]> = getAllProducts();
-  // const products = (await productsData);
-
-
-  // const handleProductClick = (productId: string) => {
-  //   // Do something with the clicked product, such as navigating to ProductDetails component
-  //   console.log(`Clicked product: ${productId}`);
-  // };
 
   const content = (
     <ul role="list" className="divide-y divide-gray-100 mt-5">
@@ -85,18 +74,18 @@ export default function ProductList() {
               >
                 <Menu.Items className="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
                   <Menu.Item>
-                  {/* {({ active }) => (
-                        <Link href={`/productdetails/${product.id}`} className={classNames(
+                  {({ active }) => (
+                        <Link href={`/backoffice/productdetails/${product.urlSlug}`} className={classNames(
                           active ? 'bg-gray-50' : '',
                           'block px-3 py-1 text-sm leading-6 text-gray-900'
                         )}>
                           Inspektera<span className="sr-only">, {product.name}</span>
                         </Link>
-                      )} */}
+                      )}
                       
                       {/* onClick={() => handleProductClick(product.id)} */}
 
-                    {({ active }) => (
+                    {/* {({ active }) => (
                       <a
                         href="/productdetails/${product.Id}"
                         className={classNames(
@@ -106,7 +95,8 @@ export default function ProductList() {
                       >
                         Inspektera<span className="sr-only">, {product.name}</span>
                       </a>
-                    )}
+                    )} */}
+
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
