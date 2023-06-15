@@ -9,8 +9,7 @@ export default function page() {
     <div className="flex">
     <AdminSideBar/>
     <div className="basis-8/12">
-      {/* Fel med ProductList just nu 
-     <ProductList/> */}
+     <ProductList/> 
     </div>
     </div>
     </>
