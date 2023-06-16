@@ -47,7 +47,7 @@ export default function ProductInformation({ product }: Props) {
           </div>
         </div>
       ) : (
-        <h2 className="p-2 text-xl">{`Produkt finns ej.`}</h2>
+        <h2 className="p-2 text-xl">{`Produkt hämtas...`}</h2>
       )}
     </div>
   );
