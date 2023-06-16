@@ -1,4 +1,3 @@
-//Behöver kanske göra om category: string till category: Category på sikt.
 type Product = {
     id: number,
     name: string,
@@ -13,28 +12,6 @@ type Product = {
     category: string,
     createdat: Date
 }
-/*
-TODO: Skriva om kod, använd interface - extends.
-Se exempel:
-
-interface Vehicle {
-  brand: string;
-  wheels: number;
-}
-
-interface Car extends Vehicle {
-  engineType: string;
-}
-
-type Vehicle = {
-  brand: string;
-  wheels: number;
-};
-
-type Car = Vehicle & {
-  engineType: string;
-};
-*/
 
 type ProductWithQuantity = {
     id: number,
@@ -59,7 +36,6 @@ type ProductWithCategoryObject = Product & {
     urlSlug: string;
   };
 }
-
 
 type Category = {
     id: number,

@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link";
 import { useState, useEffect  } from "react";
 import AdminSideBar from "../components/AdminSideBar";
 import getCategories from "@/app/api/getCategories";
@@ -14,7 +13,6 @@ export default function CreateProduct() {
     const [imageUrl, setImageUrl] = useState('');
     const [color, setColor] = useState('');
     const [category, setCategory] = useState('');
-    const [createdAt, setCreatedAt] = useState('');
 
     const [categories, setCategories] = useState<Category[]>([]);
 
@@ -31,8 +29,6 @@ export default function CreateProduct() {
       fetchCategories();
     }, []);
 
-    // console.log(categories);
-
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 
@@ -43,8 +39,6 @@ export default function CreateProduct() {
         const day = now.getDate(); 
 
         const formattedDateTime = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-
-        // const formattedDateTime = `${year}-${month + 1}-${day}`
     
         const userData = {
             name,
@@ -57,8 +51,6 @@ export default function CreateProduct() {
             categoryId: parseInt(category, 10),
             createdAt: formattedDateTime,
         };
-
-        console.log(userData);
     
         try {
             const response = await fetch('http://localhost:5000/products', {
@@ -280,7 +272,6 @@ export default function CreateProduct() {
     </form>
     </div> 
     </div> 
-
       </>
     )
   }

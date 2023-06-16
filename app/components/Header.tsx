@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useState, useEffect, useCallback } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -19,13 +19,9 @@ function classNames(...classes: string[]) {
 
 export default function Header() {
 
-  //var först false
   const [open, setOpen] = useState(false)
-
   const [categories, setCategories] = useState<Category[]>([]);
 
-  //Denna körs endast en gång i början av genereringen, tvingar då
-  //basket att vara stängd när vi öppnar sajten.
   useEffect(() => {
     async function fetchData() {
       const categoriesData = await getCategories();
@@ -35,17 +31,14 @@ export default function Header() {
     setOpen(true)
   }, []);
 
-  //Denna stoppar buggen med att dubbel-klicka för att öppna basket
   useEffect(() => {
     if (!open) {
-      // Om basket är stängd
-      setOpen(prevOpen => !prevOpen); // Ändra boolean på setOpen
+      setOpen(prevOpen => !prevOpen); 
     }
   }, [open]);
 
   const handleOpenCart = () => {
     setOpen(!open);
-    console.log('Click cart from header:', open );
   };
   
   const [cartQuantity, setCartQuantity] = useState(0);

@@ -9,11 +9,7 @@ export default function Page() {
   const pathname = usePathname()
   const [product, setProducts] = useState<ProductWithCategoryObject | null>(null);
   
-  // console.log('Pathname', pathname);
-
   const extractedSlug = pathname && typeof pathname === 'string' ? pathname.split('/').pop() : '';
-
-  // console.log('Pathname extracted:', extractedSlug);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,16 +17,13 @@ export default function Page() {
         const productData = await getProductByUrlSlug(extractedSlug as string);
         setProducts(productData);
       } catch (error) {
-        // Handle error
+        console.log(error)
       }
     };
 
     if (extractedSlug) {
       fetchData();
     }  }, [extractedSlug])
-
-
-  // console.log('UrlSlug i page.tsx:', pathname)
 
   return (
     <>

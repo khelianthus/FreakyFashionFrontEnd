@@ -1,5 +1,4 @@
 "use client";
-// import React, { useRef } from 'react';
 import LikeButton from './LikeButton';
 import NewBadge from './NewBadge';
 import Link from 'next/link';

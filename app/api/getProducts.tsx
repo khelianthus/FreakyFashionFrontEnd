@@ -1,5 +1,3 @@
-import getCategories from "./getCategories";
-
 export default async function getProducts(searchTerm: string) {
 
     const encodedSearchTerm = searchTerm.includes('%')
@@ -28,9 +26,6 @@ export default async function getProducts(searchTerm: string) {
       const date: Date = new Date(year, month, day);
 
       const createdAtString: string = date.toLocaleDateString('sv-SE', { year: 'numeric', month: '2-digit', day: '2-digit' });
-
-      // const categories = getCategories();
-      // const category: string item.category;
   
       return {
         id: item.id,

@@ -31,10 +31,8 @@ export default function AdminSideBar() {
 
   return (
     <>
-      {/* <div> */}
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
-            {/* fixed */}
             <div className=" fixed inset-0 flex">
               <Transition.Child
                 as={Fragment}
@@ -63,7 +61,6 @@ export default function AdminSideBar() {
                     </div>
                   </Transition.Child>
                   <div className="flex flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4 pr-20">
-                  {/* h-10 */}
                     <div className="flex shrink-0 items-center gap-2">
                         <span className="text-lg text-gray-700">Administration</span>
                     </div>
@@ -198,25 +195,11 @@ export default function AdminSideBar() {
                     ))}
                   </ul>
                 </li>
-                {/* <li className="mt-auto">
-                  <a
-                    href="#"
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-                  >
-                    <Cog6ToothIcon
-                      className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
-                      aria-hidden="true"
-                    />
-                    Settings
-                  </a>
-                </li> */}
               </ul>
             </nav>
           </div>
         </div>
 
-        {/* <div className="lg:pl-72"> */}
-          {/* <div className="sticky top-0 z-40 lg:mx-auto lg:max-w-7xl lg:px-8"> */}
             <div className="flex h-16 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none">
               <button
                 type="button"
@@ -227,21 +210,15 @@ export default function AdminSideBar() {
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
 
-              {/* Separator */}
               <div className="h-6 w-px bg-gray-200 lg:hidden" aria-hidden="true" />
-
                <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
-
-
-                  {/* Separator */}
                   <div className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200" aria-hidden="true" />
                 </div>
               </div>
             </div>
           <main className="py-10">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                {/* Your content */}
             </div>
           </main>
     </>

@@ -18,7 +18,6 @@ export default async function getAllProducts() {
 
       const createdAtString: string = date.toLocaleDateString('sv-SE', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
-  
       return {
         id: item.id,
         name: item.name,
@@ -31,7 +30,7 @@ export default async function getAllProducts() {
         likes: item.likes,
         color: item.color,
         category: item.category,
-        createdat: createdAtString // Skriver över createdAt med vårt nya parsade Date objekt
+        createdat: createdAtString 
       };
     });
   
