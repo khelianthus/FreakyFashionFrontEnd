@@ -1,6 +1,6 @@
-import getAllProducts from "../api/getAllProducts"
-import ProductCard from "../[searchTerm]/components/ProductCard"
-import Link from "next/link"
+import getAllProducts from '../api/getAllProducts';
+import ProductCard from '../[searchTerm]/components/ProductCard';
+import Link from 'next/link';
 
 export default async function PopularProducts() {
     
@@ -15,10 +15,10 @@ export default async function PopularProducts() {
       <div className="mx-auto max-w-screen-lg px-4 py-10 sm:px-6 sm:py-12 lg:px-8 2xl:max-w-screen-xl">
         <div className="sm:flex sm:items-baseline sm:justify-between">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Populära produkter</h2>
-          <a href="/products" className="hidden text-sm font-semibold text-gray-700 hover:text-gray-900 sm:block">
+          <Link href="/products" className="hidden text-sm font-semibold text-gray-700 hover:text-gray-900 sm:block">
             Se alla produkter
             <span aria-hidden="true"> &rarr;</span>
-          </a>
+          </Link>
         </div>
        
       <div className="mx-auto max-w-2xl py-8 sm:py-10 lg:max-w-full">

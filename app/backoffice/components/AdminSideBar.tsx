@@ -150,14 +150,14 @@ export default function AdminSideBar() {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? 'bg-gray-50 text-indigo-600'
-                              : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                              ? 'bg-gray-50 text-gray-600'
+                              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
                             'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                           )}
                         >
                           <item.icon
                             className={classNames(
-                              item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
+                              item.current ? 'text-gray-600' : 'text-gray-400 group-hover:text-gray-900',
                               'h-6 w-6 shrink-0'
                             )}
                             aria-hidden="true"
@@ -177,16 +177,16 @@ export default function AdminSideBar() {
                           href={administration.href}
                           className={classNames(
                             administration.current
-                              ? 'bg-gray-50 text-indigo-600'
-                              : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                              ? 'bg-gray-50 text-gray-600'
+                              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
                             'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                           )}
                         >
                           <span
                             className={classNames(
                                 administration.current
-                                ? 'text-indigo-600 border-indigo-600'
-                                : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600',
+                                ? 'text-gray-600 border-gray-600'
+                                : 'text-gray-400 border-gray-200 group-hover:border-gray-900 group-hover:text-gray-900',
                               'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white'
                             )}
                           >

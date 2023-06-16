@@ -1,5 +1,3 @@
-//Behöver anpassas till liten skärm
-
 export default function Footer() {
     return (
       <footer className="absolute right-0 left-0 bg-gradient-to-t from-purple-100 to-lime-100" aria-labelledby="footer-heading">
