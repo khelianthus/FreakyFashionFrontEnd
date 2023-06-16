@@ -18,10 +18,8 @@ export default function ProductList() {
       try {
         const productsData: Product[] = await getAllProducts();
         setProducts(productsData);
-
-        console.log('Productsdata:',productsData)
       } catch (error) {
-        // Handle error
+        console.log(error);
       }
     };
 
@@ -49,17 +47,6 @@ export default function ProductList() {
           <div className="flex items-center gap-x-6">
             <div className="hidden sm:flex sm:flex-col sm:items-end">
               <p className="text-sm leading-6 text-gray-900">{product.category}</p>
-              {/* {product.createdat ? (
-                <p className="mt-1 text-xs leading-5 text-gray-500">
-                </p>
-              ) : (
-                <div className="mt-1 flex items-center gap-x-1.5">
-                  <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                    <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  </div>
-                  <p className="text-xs leading-5 text-gray-500">Online</p>
-                </div>
-              )} */}
             </div>
             <Menu as="div" className="relative flex-none">
               <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">

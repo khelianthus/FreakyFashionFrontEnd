@@ -6,8 +6,6 @@ type Props = {
 
 export default function ProductInformation({ product }: Props) {
 
-  console.log('Product in ProductInformation', product);
-
   return (
     <div className='mb-6'>
       {product ? (

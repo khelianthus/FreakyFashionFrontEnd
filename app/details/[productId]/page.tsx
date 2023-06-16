@@ -1,9 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
-import { StarIcon } from "@heroicons/react/20/solid";
-import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import getProductById from "@/app/api/getProductById";
 import LikeButton from "@/app/[searchTerm]/components/LikeButton";
 
@@ -42,10 +39,8 @@ export default function Details({ params: { productId } }: Params) {
     );
 
     if (existingProduct) {
-      // Om produkten redan finns i varukorgen, öka antalet
       existingProduct.quantity += quantity;
     } else {
-      // Annars, lägg till produkten i varukorgen
       existingProducts.push(product);
     }
 
@@ -60,8 +55,6 @@ export default function Details({ params: { productId } }: Params) {
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-5xl lg:px-8">
         <div className="relative lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
-          {/* Image gallery */}
-          {/* Image selector */}
           <div className="mx-auto hidden w-full max-w-2xl sm:block lg:max-w-none aspect-h-6 aspect-w-4">
             <img
               className="object-cover  h-full"
@@ -69,7 +62,6 @@ export default function Details({ params: { productId } }: Params) {
               alt="Logotyp"
             />
           </div>
-          {/* Product info */}
           
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
           <div>
@@ -93,7 +85,6 @@ export default function Details({ params: { productId } }: Params) {
               />
             </div>
           </div>
-            {/*Add to basket & favourites*/}
 
             <div className="absolute bottom-0">
   
@@ -124,20 +115,10 @@ export default function Details({ params: { productId } }: Params) {
                 className="ml-4 flex items-center justify-center rounded-md px-3 py-3 bg-gray-100 hover:opacity-70"
               >
                 <LikeButton />
-                {/* <HeartIcon className="h-6 w-6 flex-shrink-0" aria-hidden="true" /> */}
                 <span className="sr-only">Add to favorites</span>
               </div>
             </div>
-            </div>
-
-
-            {/* <section aria-labelledby="details-heading" className="mt-12">
-              <h2 id="details-heading" className="sr-only">
-                Additional details
-              </h2>
-              <div className="divide-y divide-gray-200 border-t"></div>
-            </section> */}
-            
+            </div>            
           </div>
         </div>
       </div>
