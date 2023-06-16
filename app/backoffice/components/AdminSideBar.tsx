@@ -1,7 +1,7 @@
 'use client'
 
 import { Fragment, useState } from 'react'
-import { Dialog, Menu, Transition } from '@headlessui/react'
+import { Dialog, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   HomeIcon,
@@ -12,12 +12,12 @@ import { FaTshirt } from "react-icons/fa";
 
 const navigation = [
 
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Produkter', href: '#', icon: FaTshirt, current: false }
+  { name: 'Home', href: '/', icon: HomeIcon, current: true },
+  { name: 'Produkter', href: '/backoffice', icon: FaTshirt, current: false }
 ]
 const administration = [
 
-  { id: 1, name: 'Lägg till produkt', href: '#', initial: '+', current: false },
+  { id: 1, name: 'Lägg till produkt', href: '/backoffice/createproduct', initial: '+', current: false },
   { id: 2, name: 'Uppdatera produkt', href: '#', initial: '-', current: false },
   { id: 3, name: 'Radera produkt', href: '#', initial: 'x', current: false },
 ]
