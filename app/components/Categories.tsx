@@ -1,22 +1,16 @@
-import Link from "next/link";
-import getCategories from "../api/getCategories"
+import Link from 'next/link';
+import getCategories from '../api/getCategories';
 
 export default async function Categories() {
     
   const categoriesData: Promise<Category[]> = getCategories()
 
     const categories = (await categoriesData)
-    .slice(0, 6)
-
-    //Visar de första 6 kategorierna. 
+    .slice(0, 6) 
 
     const content = (
     <div className="bg-white">
       <div className="py-10 sm:py-10 mx-auto max-w-screen-lg lg:px-4 2xl:max-w-screen-xl">
-        <div className="flex items-center justify-between px-4 sm:px-6 lg:px-0">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900"></h2>
-        </div>
-
         <div className="relative mt-5">
           <div className="relative -mb-6 w-full overflow-x-auto pb-6">
             <ul
@@ -46,13 +40,6 @@ export default async function Categories() {
               ))}
             </ul>
           </div>
-        </div>
-
-        <div className="mt-12 flex px-4 sm:hidden">
-          <a href="#" className="text-sm font-semibold text-gray-700 hover:text-gray-900">
-            Se alla kategorier
-            <span aria-hidden="true"> &rarr;</span>
-          </a>
         </div>
       </div>
     </div>

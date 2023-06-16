@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 import ProductCard from '@/app/[searchTerm]/components/ProductCard';
 import getCategoryByUrlSlug from '@/app/api/getCategoryByUrlSlug';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 type Params = {
     params: {
@@ -40,7 +40,7 @@ export default function Category({params: {urlSlug}}:Params) {
                                     <ProductCard key={product.id} result={product} />
                                     ))
                                 ) : (
-                                    <h2 className="p-2 text-xl">{`Finns inga produkter att visa`}</h2>
+                                    <h2 className="p-2 text-xl">Finns inga produkter att visa</h2>
                                 )}
                             </div>
                         </div>
