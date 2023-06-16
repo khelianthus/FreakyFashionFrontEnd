@@ -58,11 +58,11 @@ export default function Details({ params: { productId } }: Params) {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-5xl lg:px-8">
         <div className="relative lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           {/* Image gallery */}
           {/* Image selector */}
-          <div className="mx-auto hidden w-full max-w-2xl sm:block lg:max-w-none aspect-h-3 aspect-w-3">
+          <div className="mx-auto hidden w-full max-w-2xl sm:block lg:max-w-none aspect-h-6 aspect-w-4">
             <img
               className="object-cover  h-full"
               src={product.imageUrl}
