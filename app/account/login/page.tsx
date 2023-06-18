@@ -26,29 +26,8 @@ export default function Login() {
   
       if (response.ok) {
         const data = await response.json();
-        const token = data.token; // Hämta token från svaret
-        console.log(token)
-        // Gör något med tokenet, t.ex. lagra det eller använda det för autentisering
-        
-        // Skapa ett Date-objekt för nuvarande tidpunkt
-        const currentTime = new Date();
 
-        // Skapa ett Date-objekt för tidpunkten 30 minuter framåt i tiden
-        const expirationTime = new Date(currentTime.getTime() + 30 * 60000); // 30 minuter * 60 sekunder * 1000 millisekunder
-
-        // Konvertera giltighetstiden till en sträng i formatet för en cookie
-        const expires = expirationTime.toUTCString();
-
-        // Spara tokenet som en cookie med giltighetstid på 30 minuter
-        document.cookie = `token=${token}; path=/; expires=${expires}; SameSite=Lax`;
-
-        // Du kan sedan hämta tokenet från cookien vid behov
-        const storedToken = document.cookie
-          .split('; ')
-          .find(row => row.startsWith('token='))
-          ?.split('=')[1];
-
-        console.log(storedToken); // Tokenet som hämtats från cookien
+        sessionStorage.setItem('user', JSON.stringify(data));
   
         alert("Inloggning lyckades!");
         window.location.replace("/");
@@ -62,7 +41,7 @@ export default function Login() {
   
   return (
       <>
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Logga in på ditt konto
