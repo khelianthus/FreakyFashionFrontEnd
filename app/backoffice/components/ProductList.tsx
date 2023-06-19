@@ -26,6 +26,28 @@ export default function ProductList() {
     fetchProducts();
   }, []);
 
+  const handleDeleteProduct = async (productId: any) => {
+    try {
+      const response = await fetch(`http://localhost:5000/products/${productId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productId),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+  
+        alert("Produkt borttagen!");
+        window.location.replace("/backoffice");
+      } else {
+        alert("Borttagningen misslyckades!");
+      }
+    } catch (error) {
+      console.error('Något gick fel:', error);
+    }
+  };
 
   const content = (
     <ul role="list" className="divide-y divide-gray-100 mt-5">
@@ -76,13 +98,28 @@ export default function ProductList() {
                       )}
                   </Menu.Item>
                   <Menu.Item>
-                    {({ active }) => {console.log(product.urlSlug); return(
+                    {({ active }) => {return(
                       
                       <a
-                        href="/productdetails/${product.Id}"
+                        href={`/backoffice/editproduct/${product.urlSlug}`}
                         className={classNames(
                           active ? 'bg-gray-50' : '',
                           'block px-3 py-1 text-sm leading-6 text-gray-900'
+                        )}
+                      >
+                        <span className="text-color-red">Uppdatera</span><span className="sr-only">, {product.name}</span>
+                      </a>
+
+                    )}}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => {return(
+                      
+                      <a
+                        onClick={() => handleDeleteProduct(product.id)}
+                        className={classNames(
+                          active ? 'bg-gray-50' : '',
+                          'block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer'
                         )}
                       >
                         <span className="text-color-red">Radera</span><span className="sr-only">, {product.name}</span>

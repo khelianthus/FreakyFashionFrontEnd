@@ -133,7 +133,7 @@ export default function AdminSideBar() {
 
         {/* Static sidebar for desktop */}
         <div className="hidden  lg:flex lg:w-72 lg:flex-col">
-          <div className="flex  flex-col gap-y-2 mt-4 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
+          <div className="flex  flex-col gap-y-2 mt-4 overflow-y-auto border-r h-full border-gray-200 bg-white px-6 pb-4">
             <div className="flex h-10 shrink-0 items-center">
                 <span className="text-lg  text-gray-700">Administration</span>
             </div>
