@@ -45,6 +45,7 @@ export default function Details({ params: { productId } }: Params) {
     }
 
     localStorage.setItem("cart", JSON.stringify(existingProducts));
+    window.dispatchEvent(new Event("storage"));
   }
 
   if (!product) {
@@ -103,7 +104,7 @@ export default function Details({ params: { productId } }: Params) {
             <div className="mt-6 flex">
               <form className="flex">
                 <button
-                  type="submit"
+                  type="button"
                   className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-lime-100 px-8 py-3 text-base font-medium hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
                   onClick={AddToLocalStorage}
                 >

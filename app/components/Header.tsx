@@ -44,6 +44,7 @@ export default function Header() {
   const [cartQuantity, setCartQuantity] = useState(0);
 
   useEffect(() => {
+    
     const fetchCartQuantity = () => {
       const serializedProducts = localStorage.getItem('cart');
       const basketquantity = serializedProducts ? JSON.parse(serializedProducts) : [];
@@ -57,7 +58,8 @@ export default function Header() {
       setCartQuantity(quantity);
     };
 
-    fetchCartQuantity();
+    window.addEventListener("storage", fetchCartQuantity);
+    return () => window.removeEventListener("storage", fetchCartQuantity);
   }, []);
 
   return (
