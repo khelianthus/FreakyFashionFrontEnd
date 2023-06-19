@@ -51,8 +51,8 @@ export default function Checkout() {
         setCartQuantity(totalQuantity);
   
         localStorage.setItem('cart', JSON.stringify(updatedProducts));
+        window.dispatchEvent(new Event("storage"));
         setProducts(updatedProducts); 
-        window.location.reload();
       }
     }
   }
@@ -64,7 +64,7 @@ export default function Checkout() {
       const productId = event.currentTarget.getAttribute('data-product-id');
       if (productId) {
         updateQuantity(parseInt(productId), newQuantity);
-        window.location.reload();
+        
       }
     }
   };
@@ -81,6 +81,7 @@ export default function Checkout() {
     setCartQuantity(totalQuantity);
   
     localStorage.setItem('cart', JSON.stringify(updatedProducts));
+    window.dispatchEvent(new Event("storage"));
     setProducts(updatedProducts);
   };
 
