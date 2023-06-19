@@ -3,6 +3,7 @@
 import { useState, useEffect  } from "react";
 import AdminSideBar from "../components/AdminSideBar";
 import getCategories from "@/app/api/getCategories";
+import Link from "next/link";
 
 export default function CreateProduct() {
     const [name, setName] = useState('');
@@ -259,12 +260,12 @@ export default function CreateProduct() {
     </div> 
 
       <div className="mt-6 flex items-center justify-center gap-x-6 mb-8">
-        <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+        <Link href="/backoffice" className="text-sm font-semibold leading-6 text-gray-900">
           Avbryt
-        </button>
+        </Link>
         <button
           type="submit"
-          className="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="inline-flex justify-center rounded-md px-3 py-2 text-sm font-semibold shadow-sm bg-lime-100 hover:bg-lime-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
         >
           Spara
         </button>
