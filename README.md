@@ -38,3 +38,12 @@ Run FreakyFashionBackend, runs at [http://localhost:5000](http://localhost:5000)
 - https://unsplash.com/@mehappypatel
 - https://unsplash.com/@jonathanborba
 - https://www.freepik.com/author/freepik
+
+## The team
+
+This is a first year project done by:
+
+- Fredrik - https://github.com/Fredde88
+- Linnea - https://github.com/linneaand
+- Eddie - https://github.com/eddish16
+- Karoline (me!) - https://github.com/khelianthus
